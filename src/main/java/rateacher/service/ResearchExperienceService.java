@@ -23,7 +23,7 @@ public class ResearchExperienceService {
 	}
 
 	@Transactional(readOnly = true)
-	public ResearchExperience findDepartmentById(int id) throws DataAccessException {
+	public ResearchExperience findResearchExperienceById(int id) throws DataAccessException {
 		return researchExperienceRepository.findById(id);
 	}
 
