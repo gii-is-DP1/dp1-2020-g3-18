@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +26,8 @@ public class Subject extends BaseEntity {
 
 	@NotBlank
 	private String name;
-
+	
+	@NotNull
 	private Integer curso;
 
 	@ManyToOne(optional = true)
