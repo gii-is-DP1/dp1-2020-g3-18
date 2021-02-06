@@ -31,6 +31,7 @@ import rateacher.service.StudentService;
 import rateacher.service.SubjectService;
 import rateacher.service.TeacherService;
 import rateacher.service.TeachingPlanService;
+import rateacher.util.SubjectValidator;
 
 
 
@@ -58,6 +59,11 @@ public class SubjectController {
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
+	}
+	
+	@InitBinder("subject")
+	public void initSubjectBinder(WebDataBinder dataBinder) {
+		dataBinder.setValidator(new SubjectValidator(subjectService));
 	}
 
 	@GetMapping(value = {"/subjects/new"})
@@ -130,20 +136,18 @@ public class SubjectController {
 		
 	}
   
-  @PostMapping(value = {"/subjects/save"})
+  @PostMapping(value = {"/subjects/new"})
 	public String processCreationForm(@Valid Subject subject, BindingResult result, ModelMap modelMap) {
-		String view = "subjects/subjectsList";
-		if (result.hasErrors()) {
-			modelMap.addAttribute("subject", subject);
-			return "subjects/newSubject";
+	  	if (result.hasErrors()) {
+			modelMap.addAttribute("subjects", subject);
+			return VIEW_SUBJECT_CREATE_FORM;
 		}
 		
 		else {
 			subjectService.save(subject);
 			modelMap.addAttribute("message", "Subject successfully saved!");
-			view = showSubjectsList(modelMap);
+			return "redirect:/subjects";
 		}
-		return view;
 	}
 	
 	@GetMapping(path="/subjects/delete/{subjectId}")

@@ -8,17 +8,22 @@
 
 
 <rateacher:layout pageName="subjects">
-    <h2><c:if test="${student['new']}">New </c:if> Subject</h2>
-    <form:form modelAttribute="subjects" class="form-horizontal" id="add-subject-form" action ="/subjects/save">
+    <jsp:body>
+		<h2>
+    		New Subject
+    	</h2>
+       	<form:form modelAttribute="subjects"
+                   class="form-horizontal">
+        <input type="hidden" name="id" value="${subjects.id}"/>
         <div class="form-group has-feedback">
             <rateacher:inputField label="Name" name="name"/>
             <rateacher:inputField label="Curso" name="curso"/>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-            	<button class="btn btn-default" type="submit">Save Subject</button>
-                  
-            </div>
-        </div>
-    </form:form>
+           		<div class="col-sm-offset-2 col-sm-10">
+            		<button class="btn btn-default" type="submit">Save Subject</button>                  
+            	</div>
+        	</div>
+    	</form:form>
+    </jsp:body>
 </rateacher:layout>
