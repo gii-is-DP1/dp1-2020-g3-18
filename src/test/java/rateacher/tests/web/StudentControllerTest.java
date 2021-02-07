@@ -200,15 +200,17 @@ public class StudentControllerTest {
 	//negative
 	
 	@Test
-	@DisplayName("Process creation form null name")
+	@DisplayName("Process creation form empty name")
 	@WithMockUser(value="spring")
 	void processCreationFormNegativeTest() {
 		//arrange
+		Student student22 = new Student();
 		try {
 			//act
-			mockMvc.perform(post("/students/new", student)
+			mockMvc.perform(post("/students/new", student22)
 				.param("firstName", "Will")
 				.param("lastName", "Smith")
+				.param("name", "")
 				.param("email", "will@smith.com")
 				.param("username", "willy")
 				.param("password", "smilly")
