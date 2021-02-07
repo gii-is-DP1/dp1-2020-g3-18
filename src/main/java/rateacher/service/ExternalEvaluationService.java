@@ -23,7 +23,7 @@ public class ExternalEvaluationService {
 	}
 
 	@Transactional(readOnly = true)
-	public ExternalEvaluation findDepartmentById(int id) throws DataAccessException {
+	public ExternalEvaluation findExternalEvaluationById(int id) throws DataAccessException {
 		return externalEvaluationRepository.findById(id);
 	}
 

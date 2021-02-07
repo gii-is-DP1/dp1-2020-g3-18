@@ -29,16 +29,7 @@
 					<span aria-hidden="true"></span>
 					<span>Home</span>
 				</rateacher:menuItem>
-				
-        	
-				
-				<rateacher:menuItem active="${name eq 'teachersNew'}" url="/teachers/new"
-					title="teachers">
-					<span aria-hidden="true"></span>
-					<span>Add new Teacher</span>
-				</rateacher:menuItem>
-
-				
+		
  
 				<rateacher:menuItem active="${name eq 'teachers'}" url="/teachers"
 					title="teachers">

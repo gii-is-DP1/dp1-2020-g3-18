@@ -23,7 +23,7 @@ public class ProfessionalExperienceService {
 	}
 
 	@Transactional(readOnly = true)
-	public ProfessionalExperience findDepartmentById(int id) throws DataAccessException {
+	public ProfessionalExperience findProfessionalExperienceById(int id) throws DataAccessException {
 		return professionalExperienceRepository.findById(id);
 	}
 
