@@ -7,7 +7,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
- <petclinic:layout pageName="teachingPlan">
+ <rateacher:layout pageName="teachingPlan">
     <h2><c:if test="${teachingPlan['new']}">New </c:if> TeachingPlan	</h2>
     <form:form modelAttribute="teachingPlan" class="form-horizontal" id="add-teachingPlan-form" >
         <div class="form-group has-feedback">
@@ -20,4 +20,4 @@
             </div>
         </div>
     </form:form>
-</petclinic:layout> 
+</rateacher:layout> 

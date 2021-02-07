@@ -3,9 +3,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="rateacher" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="reports">
+<rateacher:layout pageName="reports">
     <jsp:body>
          <form:form modelAttribute="report"
                    class="form-horizontal">
@@ -24,9 +24,9 @@
                 </div>
             </div>
             <div>
-            <petclinic:inputField label="Reason:" name="reason"/>
+            <rateacher:inputField label="Reason:" name="reason"/>
             </div>
             <button class="btn btn-default" type="submit">Create report</button>
         </form:form>
 	</jsp:body>
-</petclinic:layout>
+</rateacher:layout>

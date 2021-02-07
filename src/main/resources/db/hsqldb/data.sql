@@ -22,7 +22,7 @@ INSERT INTO teachingexperiences(id,titulation,comment) VALUES (1, 'Graduado en c
 
 
 --EVALUACION EXTERNA--DATOS
-INSERT INTO externalevaluations(id,note,comment) VALUES (1, 8, 'Otro comentario de prueba a ver que sale...');
+INSERT INTO externalevaluations(id,note,comment) VALUES (1, 4, 'Otro comentario de prueba a ver que sale...');
 
 --EXPERIENCIA PERSONAL--DATOS
 INSERT INTO personalexperiences(id,res_experience,tea_experience,pro_experience, ext_evaluation) VALUES (1,1,1,1,1);

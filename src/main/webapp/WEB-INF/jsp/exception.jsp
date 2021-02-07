@@ -1,9 +1,9 @@
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="rateacher" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<petclinic:layout pageName="error">
+<rateacher:layout pageName="error">
 
 	<%-- <c:if test="${exception.message == 'Expected: controller used to showcase what happens when an access is not permited'}" >  --%>  
 	<!-- Quiero hacer un if por si hay un acceso denegado me aparezca esto, proveniente del mapping /forbiddenAccess -->
@@ -21,4 +21,4 @@
     
     <p>${exception.message}</p>
 
-</petclinic:layout>
+</rateacher:layout>

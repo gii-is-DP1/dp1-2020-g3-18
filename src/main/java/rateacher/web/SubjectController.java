@@ -31,6 +31,7 @@ import rateacher.service.StudentService;
 import rateacher.service.SubjectService;
 import rateacher.service.TeacherService;
 import rateacher.service.TeachingPlanService;
+import rateacher.util.SubjectValidator;
 
 
 
@@ -58,6 +59,11 @@ public class SubjectController {
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
+	}
+	
+	@InitBinder("subject")
+	public void initSubjectBinder(WebDataBinder dataBinder) {
+		dataBinder.setValidator(new SubjectValidator(subjectService));
 	}
 
 	@GetMapping(value = {"/subjects/new"})
@@ -120,41 +126,28 @@ public class SubjectController {
 		for(Teacher teacher: subject.getTeachers()) {
 			teacherIds.add(teacher.getId());
 		}
-//		if(teacherIds.contains(teacherId)) { //regla de negocio a implementar
-//			model.put("subjectId", subjectId);
-//			Teacher teacherAdded = this.teacherService.findTeacherById(teacherId);
-//			model.put("teacher", teacherAdded);
-//			Collection<Teacher> teachers = this.teacherService.findTeachers();
-//			model.put("teachers", teachers);
-//			model.put("nono", "Error: No puedes añadir a ese profesor porque ya esta en la lista");
-//			result.rejectValue("name", "This teacher is already in the subject");
-//			return "subjects/teachersList";
-//		}else {
 		Teacher teacherAdded = this.teacherService.findTeacherById(teacherId);
 		teacherAdded.setName(teacherAdded.getFirstName());
 		teacherAdded.getSubjects().add(subject);	
 		this.teacherService.save(teacherAdded);
 		Collection<Subject> subjects = this.subjectService.findAll();
 		model.put("subjects", subjects);
-//		}
 		return "subjects/subjectsList";
 		
 	}
   
-  @PostMapping(value = {"/subjects/save"})
+  @PostMapping(value = {"/subjects/new"})
 	public String processCreationForm(@Valid Subject subject, BindingResult result, ModelMap modelMap) {
-		String view = "subjects/subjectsList";
-		if (result.hasErrors()) {
-			modelMap.addAttribute("subject", subject);
-			return "subjects/newSubject";
+	  	if (result.hasErrors()) {
+			modelMap.addAttribute("subjects", subject);
+			return VIEW_SUBJECT_CREATE_FORM;
 		}
 		
 		else {
 			subjectService.save(subject);
 			modelMap.addAttribute("message", "Subject successfully saved!");
-			view = showSubjectsList(modelMap);
+			return "redirect:/subjects";
 		}
-		return view;
 	}
 	
 	@GetMapping(path="/subjects/delete/{subjectId}")
@@ -191,8 +184,9 @@ public class SubjectController {
 			return "teachingPlans/newTeachingPlan";
 		} else {
 			teachingPlanService.save(teachingPlan);
-			teachingPlanService.save2(teachingPlan, subjectId);
 			Subject subject = subjectService.findSubjectById(subjectId);
+			subject.setTeachingPlan(teachingPlan);
+			subjectService.save(subject);
 			model.put("teachingPlan", teachingPlan);
 			model.put("subject", subject);
 			Collection<Subject> subjects = this.subjectService.findAll();

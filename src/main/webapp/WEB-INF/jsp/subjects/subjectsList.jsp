@@ -2,10 +2,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="rateacher" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 
-<petclinic:layout pageName="subjects">
+<rateacher:layout pageName="subjects">
     <h2>Subjects</h2>
 
     <table id="subjectsTable" class="table table-striped">
@@ -37,16 +37,20 @@
 
                 <td><c:out value=" ${subject.teachingPlan.name}"/>
                 <c:if test="${subject.teachingPlan  != null}">
+                <sec:authorize access="hasAuthority('teacher')">
    					   <spring:url value="/subjects/deleteTeachingPlan/{subjectId}" var="subjectUrl">
                 		<spring:param name="subjectId" value ="${subject.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(subjectUrl)}">((  Delete  ))</a>
+                	</sec:authorize>
 				</c:if>
 				<c:if test="${subject.teachingPlan  == null}">
+				<sec:authorize access="hasAuthority('teacher')">
    					   <spring:url value="/subjects/{subjectId}/newTeachingPlan" var="subjectUrl">
                 		<spring:param name="subjectId" value ="${subject.id}"/>
                 	</spring:url>
                 	<a href="${fn:escapeXml(subjectUrl)}">Add Teaching Plan</a>
+				</sec:authorize>
 				</c:if>
                 
                 </td>
@@ -93,6 +97,6 @@
     
                     
     
-</petclinic:layout>
+</rateacher:layout>
 
 

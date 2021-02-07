@@ -4,9 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="rateacher" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="subjects">
+<rateacher:layout pageName="subjects">
     <!-- <h2>Subjects related</h2> -->
     <h2><c:out value = "I am ${student.firstName} and this are my subjects"></c:out></h2>
 
@@ -40,4 +40,4 @@
         </tbody>
     </table> 
     
-</petclinic:layout>
+</rateacher:layout>

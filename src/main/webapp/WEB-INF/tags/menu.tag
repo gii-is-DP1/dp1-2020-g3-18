@@ -1,12 +1,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="rateacher" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ attribute name="name" required="true" rtexprvalue="true" description="Name of the active menu"%>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="rateacher" tagdir="/WEB-INF/tags" %>
 
 
 <nav class="navbar navbar-default" role="navigation">
@@ -24,59 +24,50 @@
 		<div class="navbar-collapse collapse" id="main-navbar">
 			<ul class="nav navbar-nav">
 
-				<petclinic:menuItem active="${name eq 'home'}" url="/"
+				<rateacher:menuItem active="${name eq 'home'}" url="/"
 					title="home page">
 					<span aria-hidden="true"></span>
 					<span>Home</span>
-				</petclinic:menuItem>
-				
-        	
-				
-				<petclinic:menuItem active="${name eq 'teachersNew'}" url="/teachers/new"
-					title="teachers">
-					<span aria-hidden="true"></span>
-					<span>Add new Teacher</span>
-				</petclinic:menuItem>
-
-				
+				</rateacher:menuItem>
+		
  
-				<petclinic:menuItem active="${name eq 'teachers'}" url="/teachers"
+				<rateacher:menuItem active="${name eq 'teachers'}" url="/teachers"
 					title="teachers">
 					<span aria-hidden="true"></span>
 					<span>Teachers</span>
-				</petclinic:menuItem>
+				</rateacher:menuItem>
 
-				<petclinic:menuItem active="${name eq 'departments'}" url="/departments"
+				<rateacher:menuItem active="${name eq 'departments'}" url="/departments"
 					title="departments">
 					<span aria-hidden="true"></span>
 					<span>Departments</span>
-				</petclinic:menuItem>
+				</rateacher:menuItem>
 
-				<petclinic:menuItem active="${name eq 'students'}" url="/students"
+				<rateacher:menuItem active="${name eq 'students'}" url="/students"
 					title="students">
 					<span aria-hidden="true"></span>
 					<span>Students</span>
-				</petclinic:menuItem>
-				<petclinic:menuItem active="${name eq 'findteachers'}" url="/findTeachers"
+				</rateacher:menuItem>
+				<rateacher:menuItem active="${name eq 'findteachers'}" url="/findTeachers"
 					title="teachers">
 					<span aria-hidden="true"></span>
 					<span>Find Teachers</span>
-				</petclinic:menuItem>
-			<petclinic:menuItem active="${name eq 'subject'}" url="/subjects"
+				</rateacher:menuItem>
+			<rateacher:menuItem active="${name eq 'subject'}" url="/subjects"
 					title="subjects">
 					<span aria-hidden="true"></span>
 					<span>Subjects</span>
-				</petclinic:menuItem>
-				<petclinic:menuItem active="${name eq 'subject'}" url="/deans/colleges"
+				</rateacher:menuItem>
+				<rateacher:menuItem active="${name eq 'subject'}" url="/deans/colleges"
 					title="Colleges">
 					<span aria-hidden="true"></span>
 					<span>Colleges</span>
-				</petclinic:menuItem>
-				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
+				</rateacher:menuItem>
+				<rateacher:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 					<span>Error</span>
-				</petclinic:menuItem>
+				</rateacher:menuItem>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="!isAuthenticated()">

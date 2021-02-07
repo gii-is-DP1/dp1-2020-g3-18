@@ -3,9 +3,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="rateacher" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="teachers">
+<rateacher:layout pageName="teachers">
     <jsp:body>
         <h2>
           <c:choose><c:when test="${score['new']}">New </c:when><c:otherwise>Update </c:otherwise></c:choose>Score
@@ -20,8 +20,8 @@
                         <c:out value="${teacher.firstName} ${teacher.lastName}"/>
                     </div>
                 </div>
-                <petclinic:inputField label="Value" name="valu"/>
-                <petclinic:inputField label="Comment" name="comment"/>
+                <rateacher:inputField label="Value" name="valu"/>
+                <rateacher:inputField label="Comment" name="comment"/>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
@@ -40,4 +40,4 @@
             </div>
         </form:form>
 	</jsp:body>
-</petclinic:layout>
+</rateacher:layout>

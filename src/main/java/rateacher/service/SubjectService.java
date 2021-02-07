@@ -19,8 +19,7 @@ import rateacher.repository.SubjectRepository;
 @Service
 public class SubjectService {
 	
-	private SubjectRepository subjectRepository;
-	
+	private SubjectRepository subjectRepository;	
 	private DepartmentRepository departmentRepository;
 	
 	@Autowired
@@ -68,7 +67,7 @@ public class SubjectService {
 	}
   
   @Transactional
-	public void save(Subject subject) {
+	public void save(Subject subject)throws DataAccessException {
 		subjectRepository.save(subject);
 	}
 

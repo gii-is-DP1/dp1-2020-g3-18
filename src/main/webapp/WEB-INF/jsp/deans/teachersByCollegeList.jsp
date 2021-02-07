@@ -3,11 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="rateacher" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
-<petclinic:layout pageName="teachers">
+<rateacher:layout pageName="teachers">
     <h2>Teachers</h2>
  
    <table id="teachersTable" class="table table-striped">
@@ -52,4 +52,4 @@
         </tbody>
     </table>
      <h4 style="color:red;"><c:out value="${nono}"></c:out></h4>
-</petclinic:layout>
+</rateacher:layout>

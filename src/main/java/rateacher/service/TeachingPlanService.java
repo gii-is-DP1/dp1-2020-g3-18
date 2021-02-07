@@ -38,10 +38,10 @@ public class TeachingPlanService {
 	public void save(TeachingPlan teachingPlan) {
 		teachingPlanRepository.save(teachingPlan);
 	}
+
 	@Transactional
-	public void save2(TeachingPlan teachingPlan, int subjectId) {
-		Subject subject= subjectService.findSubjectById(subjectId);
-		subject.setTeachingPlan(teachingPlan);
+	public void delete(TeachingPlan teachingPlan) {
+		teachingPlanRepository.delete(teachingPlan);
 	}
 	
 }

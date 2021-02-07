@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.validator.constraints.Range;
+
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +25,7 @@ public class ExternalEvaluation extends BaseEntity{
 
 	//Attributes
 	@NotNull
+	@Range(min = 1, max = 5)
 	private Integer note;
 	
 	@NotBlank

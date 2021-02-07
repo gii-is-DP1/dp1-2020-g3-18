@@ -4,9 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="rateacher" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="departments">
+<rateacher:layout pageName="departments">
     <h2><c:out value = "Teachers related to ${department.name}"></c:out></h2>
 
     <table id="tttTable" class="table table-striped">
@@ -25,4 +25,4 @@
         </c:forEach>
         </tbody>
     </table> 
-</petclinic:layout>
+</rateacher:layout>
