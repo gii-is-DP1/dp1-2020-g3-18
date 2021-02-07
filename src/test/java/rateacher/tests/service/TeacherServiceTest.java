@@ -167,7 +167,9 @@ public class TeacherServiceTest {
 	@DisplayName("Finding a Teacher by bad id")
 	void testFindTeacherByBadId() {
 		int badId = 234234;
-		assertThrows(AssertionError.class, () -> this.teacherService.findTeacherById(badId));
+		List<Teacher> res = new ArrayList<Teacher>();
+		res.add(teacherService.findTeacherById(badId));
+		assertThat(res.size()==0);
 	}
 
 	//Test Positivo
@@ -228,6 +230,49 @@ public class TeacherServiceTest {
 		assertThat(teachers.isEmpty());
 
 	}
+	
+	@Test
+	@Transactional
+	@DisplayName("Saving a teacher works fine")
+	public void shouldSaveStudent() {
+	
+		Collection<Teacher> teachers = this.teacherService.findTeachers();
+		int found = teachers.size();
 
+		Teacher teacher = new Teacher();
+		teacher.setName("Paco");
+		teacher.setFirstName("Paco");
+		teacher.setLastName("Perez");
+                User user=new User();
+                user.setUsername("paco");
+                user.setPassword("paco1");
+                user.setEnabled(true);
+                teacher.setUser(user);                
+                
+		this.teacherService.save(teacher);
+		assertThat(teacher.getId().longValue()).isNotEqualTo(0);
+
+		teachers = this.teacherService.findTeachers();
+		assertThat(teachers.size()).isEqualTo(found + 1);
+	}
+	
+	@Test
+	@DisplayName("Finding teachers by username")
+	void testFindTeacherByUsername() {
+		
+		String username="pop";
+		Teacher t = this.teacherService.findTeacherByUsername(username);
+		assertThat(t.getFirstName()=="Popench");
+	}
+	
+	@Test
+	@DisplayName("Finding teachers bad by username")
+	void testFindTeacherBadByUsername() {
+		
+		String username="test";
+		List<Teacher> t = new ArrayList<Teacher>();
+		t.add(this.teacherService.findTeacherByUsername(username));
+		assertThat(t.size()==0);
+	}
 
 }

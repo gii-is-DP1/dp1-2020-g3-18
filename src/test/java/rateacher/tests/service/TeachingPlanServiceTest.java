@@ -2,12 +2,15 @@ package rateacher.tests.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import javax.validation.ConstraintViolationException;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
@@ -97,18 +100,4 @@ public class TeachingPlanServiceTest {
 			assertTrue(t==null);
 		}
 		
-		@Test
-		@Transactional
-		@DisplayName("Saving a bad formed teachingPlan return exception")
-		public void shouldNotSaveTeachingPlan() {
-		
-			TeachingPlan nuevoTeachingPlan = new TeachingPlan("Teaching plan to ASR");
-			List<TeachingPlan>lc = new ArrayList<>();
-			int lcSize1= lc.size();
-			lc.add(nuevoTeachingPlan);
-			int lcSize2 = lc.size();
-			assertThat(lcSize2==0);
-			
-			
-		}
 }

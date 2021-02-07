@@ -23,7 +23,7 @@ public class TeachingExperienceService {
 	}
 
 	@Transactional(readOnly = true)
-	public TeachingExperience findDepartmentById(int id) throws DataAccessException {
+	public TeachingExperience findTeachingExperienceById(int id) throws DataAccessException {
 		return teachingExperienceRepository.findById(id);
 	}
 
