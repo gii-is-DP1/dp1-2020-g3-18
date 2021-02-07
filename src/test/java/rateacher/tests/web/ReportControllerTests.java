@@ -80,15 +80,18 @@ public class ReportControllerTests {
 	@WithMockUser(value="spring")
 	void ShowSubjectListTest() {
 		//arrange		
-		when(this.scoreService.findScoreById(998)).thenReturn(scoreTest);
-		System.out.println(model().toString());
+		when(this.reportService.findReports()).thenReturn(Lists.list(reportTest));
 		try {
 			//act
 			mockMvc.perform(get("/reports"))
 			//assert
 			.andExpect(status().isOk())
 			.andExpect(view().name("reports/reportsList"))
-			.andExpect(model().attribute("score", hasProperty("comment", is(scoreTest.getComment()))));
+			.andExpect(model().attribute("reports", hasItem(
+					allOf(
+							hasProperty("reason", is(reportTest.getReason())),
+							hasProperty("score", is(scoreTest)))))
+					);
 		} catch (Exception e) {
 			System.err.println("Error testing controller: "+e.getMessage());
 			e.printStackTrace();
@@ -100,20 +103,37 @@ public class ReportControllerTests {
 	@WithMockUser(value = "spring")
 	void CreateSubjectProcessTest() {
 		//arrange
-		when(this.reportService.findReportById(999)).thenReturn(reportTest);
+		Report report = new Report();
 		when(this.scoreService.findScoreById(998)).thenReturn(scoreTest);
 			try {
 				//act
-				mockMvc.perform(post("/reports/{scoreId}/new", 999, 998)
+				mockMvc.perform(post("/reports/new/{scoreId}", 998, report)
 				.with(csrf())
 					.param("reason", "No me convence su comentario"))
 				//assert
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/reports"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	@Test
+	@DisplayName("Test Creating new Report without reason")
+	@WithMockUser(value = "spring")
+	void CreateSubjectProcessTestNegative() {
+		//arrange
+		Report report = new Report();
+		when(this.scoreService.findScoreById(998)).thenReturn(scoreTest);
+			try {
+				//act
+				mockMvc.perform(post("/reports/new/{scoreId}", 998, report)
+				.with(csrf())
+					.param("reason", ""))
+				//assert
 				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("score"))
-				.andExpect(model().attribute("score", hasItem(
-						allOf(
-								hasProperty("valu", is(scoreTest.getValu())),
-								hasProperty("comment", is(scoreTest.getComment()))))));
+				.andExpect(view().name("reports/createReport"));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
