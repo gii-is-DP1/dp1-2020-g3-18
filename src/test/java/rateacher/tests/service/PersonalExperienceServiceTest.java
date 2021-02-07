@@ -1,11 +1,9 @@
 package rateacher.tests.service;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,12 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
-import rateacher.model.College;
-import rateacher.model.Department;
 import rateacher.model.PersonalExperience;
-import rateacher.model.Subject;
-import rateacher.model.Teacher;
-import rateacher.service.CollegeService;
 import rateacher.service.PersonalExperienceService;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
@@ -36,7 +29,15 @@ public class PersonalExperienceServiceTest {
 		PersonalExperience pExperience = this.pExperienceService.findById(80);
 		Assertions.assertThat(pExperience!=null);
 		
-	}	
+	}
+	
+	@Test
+	@DisplayName("Find Personal Experience By Bad ID")
+	public void testFindPersonalExperienceByBadId() {
+		int badId = 223323533;
+		assertThrows(AssertionError.class,()->this.pExperienceService.findById(badId));
+		
+	}
 	
 	@Test
 	@DisplayName("Find all Personal Experiences")
