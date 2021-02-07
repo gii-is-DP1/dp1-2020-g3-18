@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Range;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +30,7 @@ public class Subject extends BaseEntity {
 	private String name;
 	
 	@NotNull
+	@Range(min=1,max=4)
 	private Integer curso;
 
 	@ManyToOne(optional = true)
