@@ -15,7 +15,7 @@
 		    <br/>
 		    <h2>Research Experience</h2>
 		<c:if test="${personalExperience.researchExperience  == null}">
-		<sec:authorize access="hasAuthority('teacher')">
+		<sec:authorize access="hasAuthority('admin')">
    		<spring:url value="/personalExperience/{personalExperienceId}/newResearchExperience" var="personalExperienceUrl">
                 <spring:param name="personalExperienceId" value ="${personalExperience.id}"/>
         </spring:url>
@@ -32,7 +32,7 @@
 		    <br/>
 		    <h2>Teaching Experience</h2>
 		<c:if test="${personalExperience.teachingExperience  == null}">
-		<sec:authorize access="hasAuthority('teacher')">
+		<sec:authorize access="hasAuthority('admin')">
    		<spring:url value="/personalExperience/{personalExperienceId}/newTeachingExperience" var="personalExperienceUrl">
                 <spring:param name="personalExperienceId" value ="${personalExperience.id}"/>
         </spring:url>
@@ -50,7 +50,7 @@
 		    <br/>
 		    <h2>Professional Experience</h2>
 		<c:if test="${personalExperience.professionalExperience  == null}">
-		<sec:authorize access="hasAuthority('teacher')">
+		<sec:authorize access="hasAuthority('admin')">
    		<spring:url value="/personalExperience/{personalExperienceId}/newProfessionalExperience" var="personalExperienceUrl">
                 <spring:param name="personalExperienceId" value ="${personalExperience.id}"/>
         </spring:url>
@@ -68,7 +68,7 @@
 		    <br/>
 		    <h2>External Evaluation</h2>
 		<c:if test="${personalExperience.externalEvaluation  == null}">
-		<sec:authorize access="hasAuthority('teacher')">
+		<sec:authorize access="hasAuthority('admin')">
    		<spring:url value="/personalExperience/{personalExperienceId}/newExternalEvaluation" var="personalExperienceUrl">
                 <spring:param name="personalExperienceId" value ="${personalExperience.id}"/>
         </spring:url>
