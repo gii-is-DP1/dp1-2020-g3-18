@@ -31,6 +31,9 @@ public class ReportValidator implements Validator{
 		if(reportsOfTheSameScore >= 3) {
 			errors.rejectValue("reason", "too many reports", "There are already 3 reports made for this comment, you cannot report it again");
 		}
+		if(report.getReason()==null || report.getReason().isEmpty()) {
+			errors.rejectValue("reason", "no reason", "You must provide a reason for your report");
+		}
 	}
 	
 	@Override

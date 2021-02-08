@@ -59,7 +59,12 @@
                      </spring:url>
                      	<a class="btn btn-default" href="${fn:escapeXml(mySubjectsUrl)}"><c:out value="Create My Personal Experience"/></a>
       </sec:authorize>
-    
+      
+      <sec:authorize access="hasAuthority('dean')">
+     <spring:url value="/teachers/new" var="teacherUrl">
+            </spring:url>
+            <a class="btn btn-default" href="${fn:escapeXml(teacherUrl)}"><c:out value="Create Teacher"/></a>
+      </sec:authorize>
 
 
 </rateacher:layout>
