@@ -5,12 +5,14 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -76,11 +78,15 @@ public class DepartmentControllerTest{
 	Subject subject;
 	
 	@BeforeEach
-	void init() { 
+	void init() {
+		List<Department> departments = new ArrayList<Department>();
 		teacher = new Teacher("nombre", new User(), Lists.list(new College()), new PersonalExperience(),
-				Lists.list(new Department()), Lists.list(new Subject()));
+				departments, Lists.list(new Subject()));
 		teacher.setId(80);
+		
 		department = new Department("Departamento de Matemática Aplicada");
+		departments.add(department);
+		teacher.setDepartments(departments);
 		subject = new Subject("Introducción a la Matemática Discreta", 1, new Department(), new ArrayList<>(), new TeachingPlan());
 
 	}
@@ -128,6 +134,50 @@ public class DepartmentControllerTest{
 			e.printStackTrace();
 		}
 	}
+	
+	//PREGUTNAR
+		@Test
+		@DisplayName("List Teachers From Department ID")
+		@WithMockUser(value="spring")
+		void listTeachersFromDepartmentIdTest() {
+			//arrange
+			department.setId(1111);
+			List<Teacher> teachers = new ArrayList<>();
+			teachers.add(teacher);
+			when(this.departmentService.findDepartmentById(department.getId())).thenReturn(department);
+			when(this.teacherService.findTeachers()).thenReturn(teachers);
+			try {
+				//act
+				mockMvc.perform(get("/departments/{departmentId}/relatedTeachers", department.getId())
+				//assert
+				.with(csrf())
+					.param("id", "deparment.getId()"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("departments/relatedTeachers"))			
+				.andExpect(model().attribute("department", hasProperty("name", is(department.getName()))))
+				.andExpect(model().attribute("teachers", hasItem(hasProperty("name", is(teachers.get(0).getName())))));
+				
+			} catch (Exception e) {
+				System.err.println("Error testing controller: "+e.getMessage());
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		
+		
+//		@GetMapping(value = { "/departments/{departmentId}/relatedTeachers" })
+//		public String listTeachersFromDepartmentId(@PathVariable("departmentId") int departmentId, Map<String, Object> model) {
+//			Department department = this.departmentService.findDepartmentById(departmentId);
+//			model.put("department", department);
+//			List<Teacher> teachers = new ArrayList<Teacher>();
+//			for(Teacher t : (List<Teacher>) teacherService.findTeachers()) {
+//				if(t.getDepartments().contains(department)) teachers.add(t);
+//			}
+//			model.put("teachers", teachers);
+//			return "departments/relatedTeachers";
+//		}
 	
 
 }
