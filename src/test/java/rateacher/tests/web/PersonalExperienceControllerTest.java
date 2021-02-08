@@ -313,4 +313,247 @@ public class PersonalExperienceControllerTest {
 				e.printStackTrace();
 			}
 	}
+	
+	// CASOS NEGATIVOS
+	
+	@Test
+	@DisplayName("Show bad new personal Experience")
+	@WithMockUser(value="spring")
+	void ShowBadNewPersonalExperienceTest() {
+		//arrange	
+		Integer teacherId = 91;
+		when(this.teacherService.findTeacherById(160)).thenReturn(null);
+		try {
+			//act
+			mockMvc.perform(get("/teachers/{teacherId}/newPersonalExperience",teacherId))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("personalExperience/createPersonalExperienceForm"))
+			.andExpect(model().attributeDoesNotExist("teacher"));
+			
+
+	
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("Test Creating bad new Personal Experience")
+	@WithMockUser(value = "spring")
+	void CreateBadPersonalExperienceProcessTest() {
+		//arrange
+		PersonalExperience perEx = new PersonalExperience();
+		when(this.teacherService.findTeacherById(160)).thenReturn(teacherTest);
+			try {
+				//act
+				mockMvc.perform(post("/teachers/{teacherId}/newPersonalExperience", 160, perEx)
+				.with(csrf())
+					.param("name", ""))
+				//assert
+				.andExpect(status().isOk())
+				.andExpect(view().name("personalExperience/createPersonalExperienceForm"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	@Test
+	@DisplayName("Show bad personal Experience")
+	@WithMockUser(value="spring")
+	void ShowBadPersonalExperience() {
+		//arrange	
+		Integer perExpId = 91;
+		when(this.personalExperienceService.findById(166)).thenReturn(null);
+		try {
+			//act
+			mockMvc.perform(get("/personalExperience/{personalExperienceId}",perExpId))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("personalExperience/personalExperience"))
+			.andExpect(model().attributeDoesNotExist("personalExperience"));
+	
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("Show bad new research Experience")
+	@WithMockUser(value="spring")
+	void ShowBadNewResearchExperience() {
+		//arrange
+		Integer perExpId = 91;
+		ResearchExperience re = new ResearchExperience();
+		when(this.personalExperienceService.findById(166)).thenReturn(null);
+		try {
+			//act
+			mockMvc.perform(get("/personalExperience/{personalExperienceId}/newResearchExperience", perExpId, re))
+					//assert
+					.andExpect(status().isOk())
+					.andExpect(view().name("personalExperience/researchExperience"))
+					.andExpect(model().attributeDoesNotExist("personalExperience"));
+	
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("Test Creating bad new Research Experience")
+	@WithMockUser(value = "spring")
+	void CreateBadResearchExperienceProcessTest() {
+		//arrange
+		ResearchExperience re = new ResearchExperience();
+		when(this.personalExperienceService.findById(166)).thenReturn(personalExperienceTest);
+			try {
+				//act
+				mockMvc.perform(post("/personalExperience/{personalExperienceId}/newResearchExperience", 166, re)
+				.with(csrf())
+					.param("research", ""))
+				//assert
+				.andExpect(status().isOk())
+				.andExpect(view().name("personalExperience/researchExperience"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	@Test
+	@DisplayName("Show bad new teaching Experience")
+	@WithMockUser(value="spring")
+	void ShowBadNewTeachingExperience() {
+		//arrange	
+		Integer perExpId = 91;
+		TeachingExperience te = new TeachingExperience();
+		when(this.personalExperienceService.findById(166)).thenReturn(null);
+		try {
+			//act
+			mockMvc.perform(get("/personalExperience/{personalExperienceId}/newTeachingExperience", perExpId, te))
+					//assert
+					.andExpect(status().isOk())
+					.andExpect(view().name("personalExperience/teachingExperience"))
+					.andExpect(model().attributeDoesNotExist("personalExperience"));
+	
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("Test Creating bad new Teaching Experience")
+	@WithMockUser(value = "spring")
+	void CreateBadTeachingExperienceProcessTest() {
+		//arrange
+		TeachingExperience te = new TeachingExperience();
+		when(this.personalExperienceService.findById(166)).thenReturn(personalExperienceTest);
+			try {
+				//act
+				mockMvc.perform(post("/personalExperience/{personalExperienceId}/newTeachingExperience", 166, te)
+				.with(csrf())
+					.param("titulation", "")
+					.param("comment", " comment titulation experience"))
+				//assert
+				.andExpect(status().isOk())
+				.andExpect(view().name("personalExperience/teachingExperience"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	@Test
+	@DisplayName("Show bad new professional Experience")
+	@WithMockUser(value="spring")
+	void ShowBadNewProfessionalExperience() {
+		//arrange
+		Integer perExpId = 91;
+		ProfessionalExperience pro = new ProfessionalExperience();
+		when(this.personalExperienceService.findById(166)).thenReturn(null);
+		try {
+			//act
+			mockMvc.perform(get("/personalExperience/{personalExperienceId}/newProfessionalExperience", perExpId, pro))
+					//assert
+					.andExpect(status().isOk())
+					.andExpect(view().name("personalExperience/professionalExperience"))
+					.andExpect(model().attributeDoesNotExist("personalExperience"));
+	
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("Test Creating bad new professional Experience")
+	@WithMockUser(value = "spring")
+	void CreateBadProfessionalExperienceProcessTest() {
+		//arrange
+		ProfessionalExperience pro = new ProfessionalExperience();
+		when(this.personalExperienceService.findById(166)).thenReturn(personalExperienceTest);
+			try {
+				//act
+				mockMvc.perform(post("/personalExperience/{personalExperienceId}/newProfessionalExperience", 166, pro)
+				.with(csrf())
+					.param("university", "")
+					.param("comment", " comment professional experience"))
+				//assert
+				.andExpect(status().isOk())
+				.andExpect(view().name("personalExperience/profesionalExperience"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	@Test
+	@DisplayName("Show bad new external evaluation")
+	@WithMockUser(value="spring")
+	void ShowBadNewExternalEvaluation() {
+		//arrange	
+		Integer perExpId = 91;
+		ExternalEvaluation ex = new ExternalEvaluation();
+		when(this.personalExperienceService.findById(166)).thenReturn(personalExperienceTest);
+		try {
+			//act
+			mockMvc.perform(get("/personalExperience/{personalExperienceId}/newExternalEvaluation", perExpId, ex))
+					//assert
+					.andExpect(status().isOk())
+					.andExpect(view().name("personalExperience/externalEvaluation"))
+					.andExpect(model().attributeDoesNotExist("personalExperience"));
+	
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@DisplayName("Test Creating bad new external evaluation")
+	@WithMockUser(value = "spring")
+	void CreateBadExternalEvaluationProcessTest() {
+		//arrange
+		ExternalEvaluation ex = new ExternalEvaluation();
+		when(this.personalExperienceService.findById(166)).thenReturn(personalExperienceTest);
+			try {
+				//act
+				mockMvc.perform(post("/personalExperience/{personalExperienceId}/newExternalEvaluation", 166, ex)
+				.with(csrf())
+					.param("note", "3")
+					.param("evaluationReport", "")
+					.param("comment", " comment external evaluation"))
+				//assert
+				.andExpect(status().isOk())
+				.andExpect(view().name("personalExperience/externalEvaluation"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
 }
