@@ -59,38 +59,38 @@ excludeAutoConfiguration = SecurityConfiguration.class)
 public class DepartmentControllerTest{
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@MockBean
 	private DepartmentService departmentService;
-	
+
 	@MockBean
 	private TeacherService teacherService;
-	
+
 	@MockBean
 	private StudentService studentService;
-	
+
 	@MockBean
 	private SubjectService subjectService;
-	
+
 
 	Teacher teacher;
 	Department department;
 	Subject subject;
-	
+
 	@BeforeEach
 	void init() {
 		List<Department> departments = new ArrayList<Department>();
 		teacher = new Teacher("nombre", new User(), Lists.list(new College()), new PersonalExperience(),
 				departments, Lists.list(new Subject()));
 		teacher.setId(80);
-		
+
 		department = new Department("Departamento de Matemática Aplicada");
 		departments.add(department);
 		teacher.setDepartments(departments);
 		subject = new Subject("Introducción a la Matemática Discreta", 1, new Department(), new ArrayList<>(), new TeachingPlan());
 
 	}
-	
+
 	@Test
 	@DisplayName("Show Department List")
 	@WithMockUser(value="spring")
@@ -104,14 +104,14 @@ public class DepartmentControllerTest{
 			.andExpect(status().isOk())
 			.andExpect(view().name("departments/departmentsList"))
 			.andExpect(model().attribute("departments", hasItem(
-                           hasProperty("name", is(department.getName()))
-            )));
+					hasProperty("name", is(department.getName()))
+					)));
 		} catch (Exception e) {
 			System.err.println("Error testing controller: "+e.getMessage());
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	@DisplayName("List Subjects From Department ID")
 	@WithMockUser(value="spring")
@@ -128,56 +128,156 @@ public class DepartmentControllerTest{
 			.andExpect(view().name("departments/relatedSubjects"))			
 			.andExpect(model().attribute("department", hasProperty("name", is(department.getName()))))
 			.andExpect(model().attribute("subjects", hasItem(hasProperty("name", is(subject.getName())))));
-			
+
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+
+	@Test
+	@DisplayName("List Teachers From Department ID")
+	@WithMockUser(value="spring")
+	void listTeachersFromDepartmentIdTest() {
+		//arrange
+		department.setId(1111);
+		List<Teacher> teachers = new ArrayList<>();
+		teachers.add(teacher);
+		when(this.departmentService.findDepartmentById(department.getId())).thenReturn(department);
+		when(this.teacherService.findTeachers()).thenReturn(teachers);
+		try {
+			//act
+			mockMvc.perform(get("/departments/{departmentId}/relatedTeachers", department.getId())
+					//assert
+					.with(csrf())
+					.param("id", "deparment.getId()"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("departments/relatedTeachers"))			
+			.andExpect(model().attribute("department", hasProperty("name", is(department.getName()))))
+			.andExpect(model().attribute("teachers", hasItem(hasProperty("name", is(teachers.get(0).getName())))));
+
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	@DisplayName("Show Department List Bad Test")
+	@WithMockUser(value="spring")
+	void ShowDepartmentListBadTest() {
+		//arrange		
+		when(this.departmentService.findAll()).thenReturn(null);
+		try {
+			//act
+			mockMvc.perform(get("/departments"))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("departments/departmentsList"))
+			.andExpect(model().attributeDoesNotExist("department"))
+			;
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	@DisplayName("List Subjects From Department Bad ID")
+	@WithMockUser(value="spring")
+	void listSubjectsFromDepartmentBadIdTest() {
+		//arrange
+		department.setId(1111);
+		when(this.departmentService.findDepartmentById(department.getId())).thenReturn(null);
+		when(this.subjectService.findSubjectsFromDepartmentId(department.getId())).thenReturn(Lists.list(subject));
+		try {
+			//act
+			mockMvc.perform(get("/departments/{departmentId}/relatedSubjects", department.getId()))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("departments/relatedSubjects"))			
+			.andExpect(model().attributeDoesNotExist("department"))
+			.andExpect(model().attribute("subjects", hasItem(hasProperty("name", is(subject.getName())))));
+
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	@DisplayName("List Subjects From Department ID Bad Test")
+	@WithMockUser(value="spring")
+	void listSubjectsFromDepartmentIdBadTest() {
+		//arrange
+		department.setId(1111);
+		when(this.departmentService.findDepartmentById(department.getId())).thenReturn(department);
+		when(this.subjectService.findSubjectsFromDepartmentId(department.getId())).thenReturn(null);
+		try {
+			//act
+			mockMvc.perform(get("/departments/{departmentId}/relatedSubjects", department.getId()))
+			//assert
+			.andExpect(status().isOk())
+			.andExpect(view().name("departments/relatedSubjects"))			
+			.andExpect(model().attribute("department", hasProperty("name", is(department.getName()))))
+			.andExpect(model().attributeDoesNotExist("subjects"));
+
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	@DisplayName("List Teachers From Department Bad ID")
+	@WithMockUser(value="spring")
+	void listTeachersFromDepartmentBadIdTest() {
+		//arrange
+		department.setId(1111);
+		List<Teacher> teachers = new ArrayList<>();
+		teachers.add(teacher);
+		when(this.departmentService.findDepartmentById(department.getId())).thenReturn(null);
+		when(this.teacherService.findTeachers()).thenReturn(teachers);
+		try {
+			//act
+			mockMvc.perform(get("/departments/{departmentId}/relatedTeachers", department.getId())
+					//assert
+					.with(csrf())
+					.param("id", "deparment.getId()"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("departments/relatedTeachers"))			
+			.andExpect(model().attributeDoesNotExist("department"));
+
 		} catch (Exception e) {
 			System.err.println("Error testing controller: "+e.getMessage());
 			e.printStackTrace();
 		}
 	}
 	
-	//PREGUTNAR
-		@Test
-		@DisplayName("List Teachers From Department ID")
-		@WithMockUser(value="spring")
-		void listTeachersFromDepartmentIdTest() {
-			//arrange
-			department.setId(1111);
-			List<Teacher> teachers = new ArrayList<>();
-			teachers.add(teacher);
-			when(this.departmentService.findDepartmentById(department.getId())).thenReturn(department);
-			when(this.teacherService.findTeachers()).thenReturn(teachers);
-			try {
-				//act
-				mockMvc.perform(get("/departments/{departmentId}/relatedTeachers", department.getId())
-				//assert
-				.with(csrf())
+	@Test
+	@DisplayName("List Teachers From Department ID Bad Test")
+	@WithMockUser(value="spring")
+	void listTeachersFromDepartmentIdBadTest() {
+		//arrange
+		department.setId(1111);
+		List<Teacher> teachers = new ArrayList<>();
+		teachers.add(teacher);
+		when(this.departmentService.findDepartmentById(department.getId())).thenReturn(department);
+		when(this.teacherService.findTeachers()).thenReturn(null);
+		try {
+			//act
+			mockMvc.perform(get("/departments/{departmentId}/relatedTeachers", department.getId())
+					//assert
+					.with(csrf())
 					.param("id", "deparment.getId()"))
-				.andExpect(status().isOk())
-				.andExpect(view().name("departments/relatedTeachers"))			
-				.andExpect(model().attribute("department", hasProperty("name", is(department.getName()))))
-				.andExpect(model().attribute("teachers", hasItem(hasProperty("name", is(teachers.get(0).getName())))));
-				
-			} catch (Exception e) {
-				System.err.println("Error testing controller: "+e.getMessage());
-				e.printStackTrace();
-			}
+			.andExpect(status().isOk())
+			.andExpect(model().attributeDoesNotExist("teachers"));
+
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
-//		@GetMapping(value = { "/departments/{departmentId}/relatedTeachers" })
-//		public String listTeachersFromDepartmentId(@PathVariable("departmentId") int departmentId, Map<String, Object> model) {
-//			Department department = this.departmentService.findDepartmentById(departmentId);
-//			model.put("department", department);
-//			List<Teacher> teachers = new ArrayList<Teacher>();
-//			for(Teacher t : (List<Teacher>) teacherService.findTeachers()) {
-//				if(t.getDepartments().contains(department)) teachers.add(t);
-//			}
-//			model.put("teachers", teachers);
-//			return "departments/relatedTeachers";
-//		}
-	
+	}
 
 }
