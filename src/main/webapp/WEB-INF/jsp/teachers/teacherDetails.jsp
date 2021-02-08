@@ -58,7 +58,7 @@
                     
 	</c:if>
 	
-	<sec:authorize access="hasAuthority('teacher')">
+	<sec:authorize access="hasAuthority('admin')">
 	<c:if test="${teacher.personalExperience  == null}">
    		<spring:url value="/teachers/{teacherId}/newPersonalExperience" var="teacherUrl">
                 <spring:param name="teacherId" value ="${teacher.id}"/>

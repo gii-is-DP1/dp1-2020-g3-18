@@ -123,7 +123,7 @@ public class TeacherController {
 	@GetMapping(value = { "/teachersWithScore" })
 	public String showTeacherWithScore(Map<String, Object> model) {
 
-		Collection<Teacher> teachers = this.teacherService.findTeachers();
+		Collection<Teacher> teachers = this.teacherService.showTeacherWithScore();
 		model.put("teachers", teachers);
 		return "teachers/teachersWithScore";
 	}
