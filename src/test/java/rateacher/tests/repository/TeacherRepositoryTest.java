@@ -47,7 +47,7 @@ public class TeacherRepositoryTest {
 		List<Score> scores = new ArrayList<>(teacherRepository.findScoresByTeacherId(1));//id de julian
 	//assert	
 		assertFalse(scores.isEmpty());
-		assertTrue(scores.size()==3);
+		assertTrue(scores.size()==1);
 		assertTrue(scores.get(0).getComment().equals("Las clases de este profesor me parecen un autentico toston, creo que no debería deshaogarse tanto con nosotros"));
 	}
 	
