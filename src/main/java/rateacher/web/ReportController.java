@@ -27,7 +27,6 @@ public class ReportController {
 	private static final String VIEW_REPORT_CREATE_FORM ="reports/createReport";
 	
 	private ScoreService scoreService;
-
 	private ReportService reportService;
 
 	@Autowired

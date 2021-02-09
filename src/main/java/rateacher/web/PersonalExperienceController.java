@@ -59,7 +59,7 @@ public class PersonalExperienceController {
 	
 	@InitBinder("externalEvaluation")
 	public void initPersonalExperienceBinder(WebDataBinder dataBinder) {
-		dataBinder.setValidator(new ExternalEvaluationValidator(externalEvaluationService, personalExperienceService ));
+		dataBinder.setValidator(new ExternalEvaluationValidator());
 	}
 
 	

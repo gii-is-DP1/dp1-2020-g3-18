@@ -23,15 +23,12 @@ public class DepartmentController {
 	private final DepartmentService departmentService;
 	private final SubjectService subjectService;
 	private final TeacherService teacherService;
-
 	
 	@Autowired
 	public DepartmentController(DepartmentService departmentService, SubjectService subjectService, TeacherService teacherService) {
 		this.departmentService = departmentService;
 		this.subjectService	= subjectService;
 		this.teacherService	=teacherService;
-
-
 	}
 	
 	@GetMapping(value = { "/departments" })
@@ -39,7 +36,6 @@ public class DepartmentController {
 
 		Collection<Department> departments = this.departmentService.findAll();
 		model.put("departments", departments);
-		
 		
 		return "departments/departmentsList";
 		

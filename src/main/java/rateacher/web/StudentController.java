@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import rateacher.model.Student;
 import rateacher.model.Subject;
 import rateacher.model.Teacher;
-import rateacher.service.ScoreService;
 import rateacher.service.StudentService;
 import rateacher.service.TeacherService;
 
@@ -33,15 +32,13 @@ public class StudentController {
 
 	private final StudentService studentService;
 	private final TeacherService teacherService;
-	private final ScoreService scoreService;
 
 
 	@Autowired
-	public StudentController(StudentService studentService, TeacherService teacherService, ScoreService scoreService) {
+	public StudentController(StudentService studentService, TeacherService teacherService) {
 
 		this.studentService = studentService;
 		this.teacherService = teacherService;
-		this.scoreService = scoreService;
 
 	}
 

@@ -51,7 +51,7 @@ public class TeacherServiceTest2 {
 	
 	StudentRepository studentRepo = mock(StudentRepository.class);
 	
-	StudentService studentService = new StudentService(studentRepo, teacherRepo);
+	StudentService studentService = new StudentService(studentRepo);
 	
 	DepartmentRepository departmentRepo = mock(DepartmentRepository.class);
 	

@@ -16,7 +16,6 @@ import rateacher.repository.CollegeRepository;
 public class CollegeService {
 	
 	private CollegeRepository collegeRepository;
-
 	
 	@Autowired
 	public CollegeService(CollegeRepository collegeRepository) {

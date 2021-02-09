@@ -30,7 +30,6 @@ public class ReportService {
 		return report;
 	}
 	
-	
 	@Transactional()	
 	public void saveReport(@Valid Report report)  {
 		reportRepository.save(report);

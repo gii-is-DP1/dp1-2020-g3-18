@@ -28,7 +28,6 @@ public class Student extends Person{
 	@NotBlank
 	private String name;
 	
-//	@Email
 	private String email;
 	
 	//Relationships

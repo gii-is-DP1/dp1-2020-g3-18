@@ -1,6 +1,5 @@
 package rateacher.service;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -63,11 +62,6 @@ public class ScoreService {
 			scoreRepository.save(score);
 		}
 	}
-	
-//	@Transactional(readOnly = true)	
-//	public void removeScore(@Valid Score score){
-//		scoreRepository.delete(score);
-//	}
 	
 	public void delete(Score score) {
 		scoreRepository.delete(score);		

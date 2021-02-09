@@ -23,7 +23,6 @@ public class TeacherService {
 
 	private DepartmentRepository departmentRepository;
 
-
 	@Autowired
 	private UserService userService;
 
@@ -73,7 +72,6 @@ public class TeacherService {
 		// creating authorities
 		authoritiesService.saveAuthorities(teacher.getUser().getUsername(), "teacher");
 	}
-	
 
 	@Transactional	
 	public List<Teacher> findTeachersFromDepartment(int departmentId) throws DataAccessException {
@@ -86,7 +84,6 @@ public class TeacherService {
 		return result;
 	}
 
-	//Buscar profesor por id de estudiante
 	@Transactional(readOnly = true)
 	public Collection<Teacher> findTeacherByStudentId(int studentId) throws DataAccessException {
 		Collection<Teacher> teachers = teacherRepository.findByStudentId(studentId);

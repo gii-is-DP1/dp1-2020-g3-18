@@ -11,13 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import rateacher.model.Student;
 import rateacher.model.Subject;
 import rateacher.repository.StudentRepository;
-import rateacher.repository.TeacherRepository;
 
 @Service
 public class StudentService {
 
 	private StudentRepository studentRepository;
-	private TeacherRepository teacherRepository;
 
 
 	@Autowired
@@ -27,9 +25,8 @@ public class StudentService {
 	private AuthoritiesService authoritiesService;
 
 	@Autowired
-	public StudentService(StudentRepository studentRepository, TeacherRepository teacherRepository) {
+	public StudentService(StudentRepository studentRepository) {
 		this.studentRepository = studentRepository;
-		this.teacherRepository = teacherRepository;
 
 	}
 
