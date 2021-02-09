@@ -8,7 +8,6 @@
 
 <rateacher:layout pageName="scores">
     <h2>Scores</h2>
-
     <table id="scoresTable" class="table table-striped">
         <thead>
         <tr>
@@ -43,9 +42,11 @@
                 </td>
                 </sec:authorize>                 
             </tr>
-        </c:forEach> 
+        </c:forEach>
         </tbody>
     </table>
+    <h5 style="color:green">Press on the number to edit the score, do not try to edit scores made by other students</h5>
+        <h1></h1>
         <h2>Comments</h2> 
 
 	    <table class="table table-striped">
