@@ -25,7 +25,8 @@ INSERT INTO teachingexperiences(id,titulation,comment) VALUES (1, 'Graduado en c
 INSERT INTO externalevaluations(id,note,comment) VALUES (1, 4, 'Otro comentario de prueba a ver que sale...');
 
 --EXPERIENCIA PERSONAL--DATOS
-INSERT INTO personalexperiences(id,res_experience,tea_experience,pro_experience, ext_evaluation) VALUES (1,1,1,1,1);
+INSERT INTO personalexperiences(id,name,res_experience, ext_evaluation) VALUES (81,'Personal Experience',1,1);
+INSERT INTO personalexperiences(id,name,res_experience,tea_experience,pro_experience, ext_evaluation) VALUES (80,'Personal Experience',1,1,1,1);
 
 --DECANOS--ROL
 INSERT INTO users(username,password,enabled) VALUES ('josrojrom1','pepe12345',TRUE);
@@ -55,13 +56,11 @@ INSERT INTO authorities(id,username,authority) VALUES (17,'abe','teacher');
 INSERT INTO users(username,password,enabled) VALUES ('mamapon1','mamapon1',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (9,'mamapon1','teacher');
 
---Personal Experience Datos--
-INSERT INTO personalexperiences(id,name) VALUES (80,'Personal Experience');
 
 
 --PROFESORES--DATOS
 INSERT INTO teachers(id,first_name,last_name,username, personal_experience_id) VALUES (1, 'Julian', 'Locuelo García', 'julian',80);
-INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'Popench', 'De los bosques Hernández', 'pop');
+INSERT INTO teachers(id,first_name,last_name,username, personal_experience_id) VALUES (2, 'Popench', 'De los bosques Hernández', 'pop',81);
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (3, 'Macarena', 'Arejo Pínchez', 'macarron32');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (4, 'Ambrosio', 'Ansiado Augusto', 'ambrella');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (5, 'Abelle', 'Lambert Ginni', 'abe');
