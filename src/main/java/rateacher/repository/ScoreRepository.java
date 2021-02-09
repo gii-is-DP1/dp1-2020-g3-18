@@ -1,7 +1,6 @@
 package rateacher.repository;
 
 import java.util.Collection;
-import java.util.Optional;
 
 import javax.validation.Valid;
 

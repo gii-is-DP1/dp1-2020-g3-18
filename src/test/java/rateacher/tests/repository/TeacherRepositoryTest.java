@@ -14,9 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import rateacher.model.Score;
-import rateacher.model.Subject;
 import rateacher.model.Teacher;
-import rateacher.repository.ScoreRepository;
 import rateacher.repository.TeacherRepository;
 
 @ExtendWith(SpringExtension.class)
@@ -47,7 +45,7 @@ public class TeacherRepositoryTest {
 		List<Score> scores = new ArrayList<>(teacherRepository.findScoresByTeacherId(1));//id de julian
 	//assert	
 		assertFalse(scores.isEmpty());
-		assertTrue(scores.size()==3);
+		assertTrue(scores.size()==1);
 		assertTrue(scores.get(0).getComment().equals("Las clases de este profesor me parecen un autentico toston, creo que no debería deshaogarse tanto con nosotros"));
 	}
 	

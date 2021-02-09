@@ -3,7 +3,6 @@ package rateacher.tests.web;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -12,9 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,30 +25,20 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import rateacher.configuration.SecurityConfiguration;
 import rateacher.model.College;
 import rateacher.model.Department;
 import rateacher.model.PersonalExperience;
-import rateacher.model.Score;
-import rateacher.model.Student;
 import rateacher.model.Subject;
 import rateacher.model.Teacher;
 import rateacher.model.TeachingPlan;
 import rateacher.model.User;
-import rateacher.repository.CollegeRepository;
-import rateacher.repository.TeacherRepository;
-import rateacher.service.CollegeService;
-import rateacher.service.DeanService;
 import rateacher.service.DepartmentService;
-import rateacher.service.ScoreService;
 import rateacher.service.StudentService;
 import rateacher.service.SubjectService;
 import rateacher.service.TeacherService;
 import rateacher.web.DepartmentController;
-import rateacher.web.StudentController;
 
 @WebMvcTest(controllers = DepartmentController.class,
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),

@@ -1,6 +1,5 @@
 package rateacher.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -10,7 +9,6 @@ import org.hibernate.validator.constraints.Range;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -66,7 +66,6 @@ public class ProfessionalExperienceServiceTest {
 		@DisplayName("Saving a professionalExperience ")
 		public void shouldSaveProfessionalExperience() {
 		
-			Collection<ProfessionalExperience> professionalExperiences = this.professionalExperienceService.findAll();
 
 			ProfessionalExperience nuevoProfessionalExperience = new ProfessionalExperience("test to Diseño y Pruebas","test");         
 			nuevoProfessionalExperience.setId(13);

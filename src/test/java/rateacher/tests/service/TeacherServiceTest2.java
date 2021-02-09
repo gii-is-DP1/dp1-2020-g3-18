@@ -1,7 +1,6 @@
 package rateacher.tests.service;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -18,7 +17,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import junit.framework.AssertionFailedError;
 import rateacher.model.Department;
 import rateacher.model.Teacher;
 import rateacher.model.User;

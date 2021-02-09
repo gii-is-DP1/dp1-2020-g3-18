@@ -11,9 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import rateacher.model.PersonalExperience;
-import rateacher.model.Student;
-import rateacher.repository.CollegeRepository;
-import rateacher.repository.DeanRepository;
 import rateacher.repository.PersonalExperienceRepository;
 
 @ExtendWith(SpringExtension.class)

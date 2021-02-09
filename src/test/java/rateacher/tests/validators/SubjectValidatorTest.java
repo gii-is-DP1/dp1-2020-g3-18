@@ -1,4 +1,5 @@
 package rateacher.tests.validators;
+
 import static org.junit.Assert.assertTrue;
 import java.util.Locale;
 import java.util.Set;
@@ -7,11 +8,7 @@ import javax.validation.Validator;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import rateacher.model.Score;
-import rateacher.model.Student;
 import rateacher.model.Subject;
-import rateacher.model.Teacher;
-
 
 public class SubjectValidatorTest {
 

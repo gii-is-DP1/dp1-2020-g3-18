@@ -10,8 +10,6 @@ import org.springframework.data.repository.Repository;
 
 import rateacher.model.College;
 import rateacher.model.Dean;
-import rateacher.model.Student;
-import rateacher.model.Teacher;
 
 public interface DeanRepository extends Repository<Dean, Integer>{
 	

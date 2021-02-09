@@ -10,12 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.College;
-import rateacher.model.Dean;
-import rateacher.model.Score;
-import rateacher.model.Teacher;
 import rateacher.repository.CollegeRepository;
-import rateacher.repository.DeanRepository;
-import rateacher.repository.TeacherRepository;
 
 @Service
 public class CollegeService {
