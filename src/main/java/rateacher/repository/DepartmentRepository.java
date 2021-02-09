@@ -9,9 +9,7 @@ import org.springframework.data.repository.Repository;
 
 import rateacher.model.Department;
 
-
 public interface DepartmentRepository extends Repository<Department, Integer>{
-
 
 		Department findById(int id) throws DataAccessException;
 		

@@ -31,12 +31,9 @@ import rateacher.service.TeacherService;
 import rateacher.service.TeachingPlanService;
 import rateacher.util.SubjectValidator;
 
-
-
 @Controller
 public class SubjectController {
 	private static final String VIEW_SUBJECT_CREATE_FORM ="subjects/newSubject";
-	private static final String VIEW_TEACHINGPLAN_CREATE_FORM ="teachingPlans/newTeachingPlan";
 
 	
 	private final SubjectService subjectService;
@@ -61,7 +58,7 @@ public class SubjectController {
 	
 	@InitBinder("subject")
 	public void initSubjectBinder(WebDataBinder dataBinder) {
-		dataBinder.setValidator(new SubjectValidator(subjectService));
+		dataBinder.setValidator(new SubjectValidator());
 	}
 
 	@GetMapping(value = {"/subjects/new"})
@@ -89,17 +86,6 @@ public class SubjectController {
 		return "subjects/subjectsList";
 
 	}
-	
-//	@GetMapping(value = "/subjects/mySubjects/{studentId}")
-//	public ModelAndView listMySubjects(@PathVariable("studentId") int studentId) {
-//		ModelAndView mav = new ModelAndView("students/mySubjects");
-//		Student student = studentService.findStudentById(studentId);
-//		List<Subject> subjects = studentService.findMySubjects(studentId);
-//		mav.addObject("subjects", subjects);
-//		mav.addObject("studentId", studentId);
-//		return mav;
-//	}
-	
 	
 	@GetMapping(value = { "/subjects/{subjectId}/teachers" })
 	public String showTeacherByCollegesList(@PathVariable int subjectId, Map<String, Object> model) {

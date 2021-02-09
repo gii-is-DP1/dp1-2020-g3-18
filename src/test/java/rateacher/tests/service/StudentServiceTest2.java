@@ -33,7 +33,7 @@ public class StudentServiceTest2 {
 
 	StudentRepository repo = mock(StudentRepository.class);
 
-	StudentService studentService = new StudentService(repo, null);
+	StudentService studentService = new StudentService(repo);
 
 	Student s1;
 	Student s2;
@@ -135,8 +135,6 @@ public class StudentServiceTest2 {
 	}
 
 	// Casos negativos
-	
-	
 	@Test
 	@DisplayName("find by id doesn't exists ")
 	void testFindbybadId() throws DataAccessException {
@@ -144,7 +142,6 @@ public class StudentServiceTest2 {
 		when(repo.findById(badId)).thenReturn(null);
 		assertThrows(AssertionError.class,()->this.studentService.findStudentById(badId));
 	}
-
 	
 	@Test
 	@DisplayName("Finding bad by Username")
@@ -154,7 +151,6 @@ public class StudentServiceTest2 {
 		Student res = studentService.findStudentByUsername(badUsername);
 		assertTrue(res == null);
 	}
-	
 	
 	@Test
 	@DisplayName("Finding bad my subjects")

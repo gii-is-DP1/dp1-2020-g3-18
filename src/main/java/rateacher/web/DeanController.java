@@ -36,9 +36,8 @@ public class DeanController {
 	private final CollegeRepository collRepo;
 	private final TeacherService teacherService;
 	private final CollegeService collegeService;
-	
+
 	private static final String VIEW_TEACHER_CREATE_FORM ="teachers/newTeacherCreationForm";
-	
 	
 	@Autowired
 	public DeanController( TeacherRepository teachers, CollegeRepository collRepo, DeanService deanService, TeacherService teacherService, CollegeService collegeService) {
@@ -58,7 +57,6 @@ public class DeanController {
 	public void initTeacherBinder(WebDataBinder dataBinder) {
 		dataBinder.setValidator(new TeacherValidator());
 	}
-
 
 	@GetMapping(value = {"/teachers/new"})
 	public String newTeacherCreationForm(ModelMap model) {
@@ -136,7 +134,6 @@ public class DeanController {
 		model.put("colleges", colleges);
 		}
 		return "deans/collegesList";
-		
 	}
 
 }

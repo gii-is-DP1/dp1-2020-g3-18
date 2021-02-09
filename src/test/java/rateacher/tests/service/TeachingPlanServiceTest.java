@@ -28,7 +28,7 @@ public class TeachingPlanServiceTest {
 	
 	TeachingPlanRepository repo = mock(TeachingPlanRepository.class);
 	
-	TeachingPlanService teachingPlanService = new TeachingPlanService(repo, null);
+	TeachingPlanService teachingPlanService = new TeachingPlanService(repo);
 	
 	TeachingPlan t1;
 	TeachingPlan t2;

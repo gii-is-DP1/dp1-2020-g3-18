@@ -24,8 +24,7 @@ public class ProfessionalExperience extends BaseEntity{
 
 	private String comment;
 
-	
-	//Relationships
+
 
 
 	

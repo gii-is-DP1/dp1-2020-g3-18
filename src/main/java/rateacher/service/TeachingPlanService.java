@@ -14,12 +14,10 @@ import rateacher.repository.TeachingPlanRepository;
 public class TeachingPlanService {
 
 	private TeachingPlanRepository teachingPlanRepository;
-	private SubjectService subjectService;
 	
 	@Autowired
-	public TeachingPlanService(TeachingPlanRepository teachingPlanRepository, SubjectService subjectService) {
+	public TeachingPlanService(TeachingPlanRepository teachingPlanRepository) {
 		this.teachingPlanRepository = teachingPlanRepository;
-		this.subjectService=subjectService;
 	}
 
 	@Transactional(readOnly = true)

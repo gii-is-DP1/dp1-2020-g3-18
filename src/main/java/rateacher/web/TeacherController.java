@@ -2,16 +2,13 @@
 package rateacher.web;
 
 import java.util.ArrayList;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import rateacher.model.Subject;
 import rateacher.service.SubjectService;
 
@@ -39,8 +36,6 @@ import rateacher.util.ScoreValidator;
 
 import org.springframework.beans.BeanUtils;
 
-
-
 @Controller
 public class TeacherController {
 
@@ -64,7 +59,7 @@ public class TeacherController {
 
 	@InitBinder("score")
 	public void initTeacherBinder(WebDataBinder dataBinder) {
-		dataBinder.setValidator(new ScoreValidator(scoreService, studentService, teacherService));
+		dataBinder.setValidator(new ScoreValidator());
 	}
 	
 	@GetMapping(value = { "/teachers" })
@@ -176,8 +171,8 @@ public class TeacherController {
 
 
 	@GetMapping(value = { "teachers/{teacherId}/scores/new" })
-	public String initCreationForm(@PathVariable int teacherId, ModelMap model) { // para crear el modelo que va a la
-																					// vista.
+	public String initCreationForm(@PathVariable int teacherId, ModelMap model) { 
+																					
 		Score score = new Score();
 		Teacher teacher = this.teacherService.findTeacherById(teacherId);
 		score.setTeacher(teacher);

@@ -5,19 +5,11 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import rateacher.model.ExternalEvaluation;
-import rateacher.service.ExternalEvaluationService;
-import rateacher.service.PersonalExperienceService;
 
 public class ExternalEvaluationValidator implements Validator {
 
-	private final ExternalEvaluationService externalEvaluationService;
-	private final PersonalExperienceService personalExperienceService;
-
 	@Autowired
-	public ExternalEvaluationValidator(ExternalEvaluationService externalEvaluationService,
-			PersonalExperienceService personalExperienceService) {
-		this.externalEvaluationService = externalEvaluationService;
-		this.personalExperienceService = personalExperienceService;
+	public ExternalEvaluationValidator() {
 	}
 
 	@Override
@@ -28,10 +20,10 @@ public class ExternalEvaluationValidator implements Validator {
 		}else if (externalEvaluation.getNote() > 5 || externalEvaluation.getNote() < 0) {
 			errors.rejectValue("note", "bad range", "Value must be between 0 and 5");
 		}
-		if (externalEvaluation.getEvaluationReport()=="") {
+		if (externalEvaluation.getEvaluationReport().equals("")) {
 			errors.rejectValue("evaluationReport", "blank evaluationReport", "must not be empty");
 		}
-		if (externalEvaluation.getComment()=="") {
+		if (externalEvaluation.getComment().equals("")) {
 			errors.rejectValue("comment", "blank comment", "must not be empty");
 		}
 		

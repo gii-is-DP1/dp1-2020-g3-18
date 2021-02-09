@@ -21,8 +21,4 @@ public class ResearchExperience extends BaseEntity{
 	@NotBlank
 	private String research;
 
-	
-	
-	//Relationships
-
 }
