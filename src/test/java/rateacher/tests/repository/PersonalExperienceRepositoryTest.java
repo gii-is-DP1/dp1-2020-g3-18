@@ -28,7 +28,7 @@ public class PersonalExperienceRepositoryTest {
 	void findByIdTest() {
 	//arrange	
 	//act
-		PersonalExperience pExperience = this.pExperienceRepository.findById(1);
+		PersonalExperience pExperience = this.pExperienceRepository.findById(81);
 	//assert	
 		assertFalse(pExperience.equals(new PersonalExperience()));
 		assertTrue(pExperience!=null);
