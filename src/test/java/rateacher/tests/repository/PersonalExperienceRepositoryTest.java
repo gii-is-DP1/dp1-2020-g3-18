@@ -11,9 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import rateacher.model.PersonalExperience;
-import rateacher.model.Student;
-import rateacher.repository.CollegeRepository;
-import rateacher.repository.DeanRepository;
 import rateacher.repository.PersonalExperienceRepository;
 
 @ExtendWith(SpringExtension.class)
@@ -28,7 +25,7 @@ public class PersonalExperienceRepositoryTest {
 	void findByIdTest() {
 	//arrange	
 	//act
-		PersonalExperience pExperience = this.pExperienceRepository.findById(1);
+		PersonalExperience pExperience = this.pExperienceRepository.findById(81);
 	//assert	
 		assertFalse(pExperience.equals(new PersonalExperience()));
 		assertTrue(pExperience!=null);

@@ -25,7 +25,8 @@ INSERT INTO teachingexperiences(id,titulation,comment) VALUES (1, 'Graduado en c
 INSERT INTO externalevaluations(id,note,comment) VALUES (1, 4, 'Otro comentario de prueba a ver que sale...');
 
 --EXPERIENCIA PERSONAL--DATOS
-INSERT INTO personalexperiences(id,res_experience,tea_experience,pro_experience, ext_evaluation) VALUES (1,1,1,1,1);
+INSERT INTO personalexperiences(id,name,res_experience, ext_evaluation) VALUES (81,'Personal Experience',1,1);
+INSERT INTO personalexperiences(id,name,res_experience,tea_experience,pro_experience, ext_evaluation) VALUES (80,'Personal Experience',1,1,1,1);
 
 --DECANOS--ROL
 INSERT INTO users(username,password,enabled) VALUES ('josrojrom1','pepe12345',TRUE);
@@ -55,13 +56,11 @@ INSERT INTO authorities(id,username,authority) VALUES (17,'abe','teacher');
 INSERT INTO users(username,password,enabled) VALUES ('mamapon1','mamapon1',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (9,'mamapon1','teacher');
 
---Personal Experience Datos--
-INSERT INTO personalexperiences(id,name) VALUES (80,'Personal Experience');
 
 
 --PROFESORES--DATOS
 INSERT INTO teachers(id,first_name,last_name,username, personal_experience_id) VALUES (1, 'Julian', 'Locuelo García', 'julian',80);
-INSERT INTO teachers(id,first_name,last_name,username) VALUES (2, 'Popench', 'De los bosques Hernández', 'pop');
+INSERT INTO teachers(id,first_name,last_name,username, personal_experience_id) VALUES (2, 'Popench', 'De los bosques Hernández', 'pop',81);
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (3, 'Macarena', 'Arejo Pínchez', 'macarron32');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (4, 'Ambrosio', 'Ansiado Augusto', 'ambrella');
 INSERT INTO teachers(id,first_name,last_name,username) VALUES (5, 'Abelle', 'Lambert Ginni', 'abe');
@@ -83,11 +82,10 @@ INSERT INTO students(id,first_name,last_name,username) VALUES (3, 'Serperior', '
 
 --PUNTUACIONES--DATOS
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Las clases de este profesor me parecen un autentico toston, creo que no debería deshaogarse tanto con nosotros',1,1);
-INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (2, 3, 'Las clases de este profesor estan mejorando desde el ultimo trimestre, le falta confianza',1,1);
-INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (3, 5, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,1);
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (4, 3, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
-INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (5, 4, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (6, 5, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,3);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (5, 4, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (7, 5, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
 
 --REPORTES--DATOS
 INSERT INTO reports(id,reason, score_id) VALUES (5,'Comportamiento abusivo', 1);
@@ -118,6 +116,7 @@ INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
 INSERT INTO teachers_subjects VALUES (1,111);
 INSERT INTO teachers_subjects VALUES (2,112);
 INSERT INTO teachers_subjects VALUES (1,113);
+INSERT INTO teachers_subjects VALUES (1,116);
 INSERT INTO teachers_subjects VALUES (3,114);
 INSERT INTO teachers_subjects VALUES (2,118);
 INSERT INTO teachers_subjects VALUES (4,115);

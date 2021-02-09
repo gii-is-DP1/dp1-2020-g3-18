@@ -15,11 +15,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataAccessException;
-import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.Score;
 import rateacher.model.Student;
@@ -35,7 +33,7 @@ public class StudentServiceTest2 {
 
 	StudentRepository repo = mock(StudentRepository.class);
 
-	StudentService studentService = new StudentService(repo, null);
+	StudentService studentService = new StudentService(repo);
 
 	Student s1;
 	Student s2;
@@ -135,32 +133,8 @@ public class StudentServiceTest2 {
 		assertTrue(!res.isEmpty());
 		assertTrue(res.size() == 1);
 	}
-	
-//	@Test
-//	@Transactional
-//	@DisplayName("Saving a student")
-//	public void shouldSaveStudent() {
-//	
-//		Collection<Student> student = this.studentService.findStudents();
-//		int found = student.size();
-//
-//		Student nuevoStudent = new Student();         
-//		nuevoStudent.setId(13);
-//		nuevoStudent.setName("Amparo");
-//		nuevoStudent.setLastName("García");
-//		nuevoStudent.setUser(new User());
-//                
-//		this.studentService.saveStudent(nuevoStudent);
-//		
-//		
-//		Collection<Student>students = this.studentService.findStudents();
-//		assertTrue(students.size()== found + 1);
-//	}
 
 	// Casos negativos
-	
-	//FindAll ??
-	
 	@Test
 	@DisplayName("find by id doesn't exists ")
 	void testFindbybadId() throws DataAccessException {
@@ -168,7 +142,6 @@ public class StudentServiceTest2 {
 		when(repo.findById(badId)).thenReturn(null);
 		assertThrows(AssertionError.class,()->this.studentService.findStudentById(badId));
 	}
-
 	
 	@Test
 	@DisplayName("Finding bad by Username")
@@ -178,7 +151,6 @@ public class StudentServiceTest2 {
 		Student res = studentService.findStudentByUsername(badUsername);
 		assertTrue(res == null);
 	}
-	
 	
 	@Test
 	@DisplayName("Finding bad my subjects")

@@ -17,15 +17,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
-import javassist.expr.NewArray;
 import rateacher.model.College;
 import rateacher.model.Dean;
-import rateacher.model.Score;
 import rateacher.model.Teacher;
 import rateacher.repository.CollegeRepository;
-import rateacher.repository.DeanRepository;
 import rateacher.repository.TeacherRepository;
 import rateacher.service.CollegeService;
 import rateacher.service.DeanService;
@@ -40,9 +36,8 @@ public class DeanController {
 	private final CollegeRepository collRepo;
 	private final TeacherService teacherService;
 	private final CollegeService collegeService;
-	
+
 	private static final String VIEW_TEACHER_CREATE_FORM ="teachers/newTeacherCreationForm";
-	
 	
 	@Autowired
 	public DeanController( TeacherRepository teachers, CollegeRepository collRepo, DeanService deanService, TeacherService teacherService, CollegeService collegeService) {
@@ -62,7 +57,6 @@ public class DeanController {
 	public void initTeacherBinder(WebDataBinder dataBinder) {
 		dataBinder.setValidator(new TeacherValidator());
 	}
-
 
 	@GetMapping(value = {"/teachers/new"})
 	public String newTeacherCreationForm(ModelMap model) {
@@ -140,7 +134,6 @@ public class DeanController {
 		model.put("colleges", colleges);
 		}
 		return "deans/collegesList";
-		
 	}
 
 }

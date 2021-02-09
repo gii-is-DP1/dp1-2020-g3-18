@@ -11,18 +11,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
-
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javassist.bytecode.stackmap.BasicBlock.Catch;
-import rateacher.model.Department;
 import rateacher.model.Report;
 import rateacher.model.Score;
-import rateacher.model.Student;
-import rateacher.model.Teacher;
-import rateacher.model.User;
 import rateacher.repository.ReportRepository;
 import rateacher.repository.ScoreRepository;
 import rateacher.repository.StudentRepository;
@@ -47,7 +39,7 @@ public class ReportServiceTest2 {
 	
 	StudentRepository studentRepo = mock(StudentRepository.class);
 	
-	StudentService studentService = new StudentService(studentRepo, teacherRepo);
+	StudentService studentService = new StudentService(studentRepo);
 	
 	ScoreRepository scoreRepo = mock(ScoreRepository.class);
 	

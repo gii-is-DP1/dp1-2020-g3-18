@@ -1,22 +1,15 @@
 
 package rateacher.web;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-
 import rateacher.model.Subject;
-import rateacher.model.Subjects;
 import rateacher.service.SubjectService;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,12 +32,9 @@ import rateacher.model.Teachers;
 import rateacher.service.ScoreService;
 import rateacher.service.StudentService;
 import rateacher.service.TeacherService;
-import rateacher.util.DuplicatedStudentScoreException;
 import rateacher.util.ScoreValidator;
 
 import org.springframework.beans.BeanUtils;
-
-
 
 @Controller
 public class TeacherController {
@@ -69,7 +59,7 @@ public class TeacherController {
 
 	@InitBinder("score")
 	public void initTeacherBinder(WebDataBinder dataBinder) {
-		dataBinder.setValidator(new ScoreValidator(scoreService, studentService, teacherService));
+		dataBinder.setValidator(new ScoreValidator());
 	}
 	
 	@GetMapping(value = { "/teachers" })
@@ -123,7 +113,7 @@ public class TeacherController {
 	@GetMapping(value = { "/teachersWithScore" })
 	public String showTeacherWithScore(Map<String, Object> model) {
 
-		Collection<Teacher> teachers = this.teacherService.findTeachers();
+		Collection<Teacher> teachers = this.teacherService.showTeacherWithScore();
 		model.put("teachers", teachers);
 		return "teachers/teachersWithScore";
 	}
@@ -181,8 +171,8 @@ public class TeacherController {
 
 
 	@GetMapping(value = { "teachers/{teacherId}/scores/new" })
-	public String initCreationForm(@PathVariable int teacherId, ModelMap model) { // para crear el modelo que va a la
-																					// vista.
+	public String initCreationForm(@PathVariable int teacherId, ModelMap model) { 
+																					
 		Score score = new Score();
 		Teacher teacher = this.teacherService.findTeacherById(teacherId);
 		score.setTeacher(teacher);
@@ -214,6 +204,13 @@ public class TeacherController {
 	public String initEditForm(@PathVariable int teacherId, @PathVariable int scoreId, ModelMap model) {
 		Score score = this.scoreService.findScoreById(scoreId);
 		model.put("score", score);
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+        Student studentSession = this.studentService.findStudentByUsername(principal);
+		if (score.getStudent().getId()!= studentSession.getId()) {
+			Boolean allow = false;
+			model.put("notAllowed", allow);
+			return "/exception";
+		}
 		Teacher teacher = this.teacherService.findTeacherById(teacherId);
 		model.put("teacher", teacher);
 		return "scores/createForm";

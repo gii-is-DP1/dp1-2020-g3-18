@@ -2,7 +2,6 @@ package rateacher.repository;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -21,15 +20,7 @@ public interface SubjectRepository extends Repository<Subject, Integer> {
 
 	void save(@Valid Subject subject) throws DataAccessException;
 
-	
 	void delete(@Valid Subject subject);
-	
-//	@Query("select s from Subject s where s.department.id = ?1 ")
-//	List<Subject> findSubjectsFromDepartmentId(int idDepartment);
-	
-//	@Query("select s from Subject s in (select d from Department d where d=?1) ")
-//	List<Subject> findSubjectsFromDepartmentId(int idDepartment);
-
 	
 	@Query("select s from Subject s where s.department.id = ?1")
 	List<Subject> findSubjectsFromDepartmentId(int idDepartment);

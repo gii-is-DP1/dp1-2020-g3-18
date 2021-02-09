@@ -30,11 +30,11 @@ public class SubjectServiceTest2 {
 
 	SubjectRepository subjectRepo = mock(SubjectRepository.class);
 
-	SubjectService subjectService = new SubjectService(subjectRepo, null);
+	SubjectService subjectService = new SubjectService(subjectRepo);
 	
 	TeachingPlanRepository teachingPlanRepo = mock(TeachingPlanRepository.class);
 
-	TeachingPlanService teachingPlanService = new TeachingPlanService(teachingPlanRepo, subjectService);
+	TeachingPlanService teachingPlanService = new TeachingPlanService(teachingPlanRepo);
 
 	Subject s1;
 	Subject s2;

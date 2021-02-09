@@ -66,8 +66,6 @@ public class ExternalEvaluationServiceTest {
 		@DisplayName("Saving a externalEvaluation ")
 		public void shouldSaveExternalEvaluation() {
 		
-			Collection<ExternalEvaluation> externalEvaluations = this.externalEvaluationService.findAll();
-
 			ExternalEvaluation nuevoExternalEvaluation = new ExternalEvaluation(3,"test to Diseño y Pruebas","test");         
 			nuevoExternalEvaluation.setId(13);
 	                

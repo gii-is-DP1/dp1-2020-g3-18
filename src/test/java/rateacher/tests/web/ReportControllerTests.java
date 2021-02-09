@@ -3,16 +3,11 @@ package rateacher.tests.web;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,16 +31,11 @@ import rateacher.model.Student;
 import rateacher.model.Teacher;
 import rateacher.model.Score;
 import rateacher.model.Report;
-import rateacher.model.User;
 
 import rateacher.service.ScoreService;
-import rateacher.service.StudentService;
-import rateacher.service.SubjectService;
-import rateacher.service.TeacherService;
 import rateacher.service.ReportService;
 
 import rateacher.web.ReportController;
-
 
 @WebMvcTest(controllers = ReportController.class,
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),

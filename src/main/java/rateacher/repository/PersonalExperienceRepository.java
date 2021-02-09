@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
 import rateacher.model.PersonalExperience;
-import rateacher.model.Student;
 
 public interface PersonalExperienceRepository extends Repository<PersonalExperience, Integer>{
 	

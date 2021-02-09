@@ -60,7 +60,6 @@ public class UserController {
 			return VIEWS_OWNER_CREATE_FORM;
 		}
 		else {
-			//creating student, user, and authority
 			this.studentService.saveStudent(student);
 			return "redirect:/";
 		}

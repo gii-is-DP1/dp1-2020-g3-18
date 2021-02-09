@@ -1,25 +1,23 @@
 package rateacher.tests.service;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
+import java.util.List;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
 
-import junit.framework.AssertionFailedError;
 import rateacher.model.Department;
+import rateacher.model.Score;
+import rateacher.model.Student;
 import rateacher.model.Teacher;
 import rateacher.model.User;
 import rateacher.repository.AuthoritiesRepository;
@@ -36,7 +34,7 @@ import rateacher.service.TeacherService;
 import rateacher.service.UserService;
 
 
-@DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
+
 public class TeacherServiceTest2 {
 	
 	UserRepository userRepo = mock(UserRepository.class);
@@ -53,7 +51,7 @@ public class TeacherServiceTest2 {
 	
 	StudentRepository studentRepo = mock(StudentRepository.class);
 	
-	StudentService studentService = new StudentService(studentRepo, teacherRepo);
+	StudentService studentService = new StudentService(studentRepo);
 	
 	DepartmentRepository departmentRepo = mock(DepartmentRepository.class);
 	
@@ -66,6 +64,8 @@ public class TeacherServiceTest2 {
 	
 	Teacher t1;
 	Teacher t2;
+	Student s1;
+
 	
 	// Casos positivos
 	@BeforeEach
@@ -75,6 +75,7 @@ public class TeacherServiceTest2 {
 		t1.setLastName("Pedrolo");
 		t1.setUser(new User());
 		
+		
 		Collection<Department> departments = new ArrayList<Department>();
 		
 		Department department1 = new Department();
@@ -82,6 +83,14 @@ public class TeacherServiceTest2 {
 		departments.add(department1);
 		
 		t1.setDepartments(departments);
+		
+		s1 = new Student();
+		s1.setLastName("Garcia");
+		s1.setFirstName("Antonio");
+		s1.setUser(new User());
+		s1.setTeachers(new ArrayList<Teacher>());
+
+		
 	}
 	
 	@Test
@@ -121,4 +130,118 @@ public class TeacherServiceTest2 {
 		int badId = 234234;
 		assertTrue(this.teacherService.findTeacherById(badId)==null);
 	}
+	
+
+	// Test positivo
+	@Test
+	@DisplayName("Finding teachers by student id")
+	void testFindTeacherByStudentId() { 
+		s1.setId(100);
+		s1.setName("asas");
+		s1.getTeachers().add(t1);
+		when(this.teacherRepo.findByStudentId(100)).thenReturn((List<Teacher>) (s1.getTeachers()));
+
+		
+		assertTrue(s1.getTeachers().size() == 1);
+	}
+	
+	// Test negativo
+	@Test
+	@DisplayName("Finding a teacher that a student doesn`t have")
+
+	void testFindTeacherNotInStudentCollection() {
+		s1.setId(100);
+		when(this.teacherRepo.findByStudentId(100)).thenReturn((List<Teacher>) (s1.getTeachers()));
+				
+		assertFalse(s1.getTeachers().contains(t1));
+		
+	}
+	
+
+	//Test positivo
+	@Test
+	@DisplayName("Find teacher by first name")
+	void testFindTeacherByFirstName() {
+		t1.setFirstName("prueba");
+		List<Teacher> list = new ArrayList<Teacher>();
+		list.add(t1);
+		when(this.teacherRepo.findByFirstName("prueba")).thenReturn(list);
+		
+		assertTrue(list.size()==1);
+		assertTrue(list.get(0) == t1);
+	}
+	
+	//Test negativo
+	@Test
+	@DisplayName("Find teacher by first name that not exist")
+	void testFindTeacherByFirstNameNoExist() {
+		List<Teacher> list = new ArrayList<Teacher>();
+		when(this.teacherRepo.findByFirstName("nadaaaa")).thenReturn(list);
+		
+		assertTrue(list.isEmpty());
+	
+	}
+		
+	//Test positivo
+	@Test
+	@DisplayName("Find teacher with score")
+	void findTeacherWithScore() {
+		Score s = new Score();
+		s.setTeacher(t1);
+		List<Teacher> teachers = new ArrayList<Teacher>();
+		teachers.add(t1);
+
+		when(this.teacherService.showTeacherWithScore()).thenReturn(teachers);
+		
+		assertTrue(teachers.size()==1);
+	}
+	
+	//Test negativo
+	@Test
+	@DisplayName("Find teacher with no score")
+	void findTeacherWithNoScore() {
+
+		List<Teacher> teachers = new ArrayList<Teacher>();
+
+		when(this.teacherService.showTeacherWithScore()).thenReturn(teachers);
+		
+		assertTrue(teachers.isEmpty());
+	}
+	
+	//Test positivo
+	@Test
+	@DisplayName("Find teacher from Department")
+	void testFindTeacherFromDepartment() {
+
+		Department d = new Department();
+		d.setId(100);
+		t1.getDepartments().add(d);
+		List<Teacher> t = new ArrayList<Teacher>();
+		t.add(t1);
+		when(this.departmentRepo.findById(100)).thenReturn(d);
+		when(this.teacherRepo.findAll()).thenReturn(t);
+		
+		assertTrue(t.size()==1);
+
+	}
+	
+	//Test negativo
+	@Test
+	@DisplayName("Find teachers that are not from a Department (Empty)")
+	void testFindTeacherNoFromDepartment() {
+		
+		Department d = new Department();
+		d.setId(100);
+		List<Teacher> t = new ArrayList<Teacher>();
+		when(this.departmentRepo.findById(100)).thenReturn(d);
+		when(this.teacherRepo.findAll()).thenReturn(t);
+		
+		assertTrue(t.size()==0);
+		assertFalse(t.contains(t1));
+	}
+	
+
+	
+	
+	
 }

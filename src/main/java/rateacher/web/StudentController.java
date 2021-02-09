@@ -1,30 +1,16 @@
 package rateacher.web;
 
-
 import java.util.List;
-
 import java.util.Collection;
-
 import java.util.Map;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-import rateacher.model.Score;
 import rateacher.model.Student;
-
 import rateacher.model.Subject;
-import rateacher.model.User;
-
 import rateacher.model.Teacher;
-import rateacher.repository.TeacherRepository;
-import rateacher.service.ScoreService;
-
 import rateacher.service.StudentService;
 import rateacher.service.TeacherService;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -46,15 +32,13 @@ public class StudentController {
 
 	private final StudentService studentService;
 	private final TeacherService teacherService;
-	private final ScoreService scoreService;
 
 
 	@Autowired
-	public StudentController(StudentService studentService, TeacherService teacherService, ScoreService scoreService) {
+	public StudentController(StudentService studentService, TeacherService teacherService) {
 
 		this.studentService = studentService;
 		this.teacherService = teacherService;
-		this.scoreService = scoreService;
 
 	}
 
@@ -101,6 +85,10 @@ public class StudentController {
 		List<Subject> subjects = studentService.findMySubjects(studentId);
 		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
         Student student = this.studentService.findStudentByUsername(principal);
+        if(studentId != student.getId()) {
+        	mav = new ModelAndView("redirect:/exception");
+        	return mav; 
+        }
         mav.addObject("student", student);
 		mav.addObject("subjects", subjects);
 		mav.addObject("studentId", studentId);
@@ -112,7 +100,12 @@ public class StudentController {
 		ModelAndView mav = new ModelAndView("teachers/myRatedTeachersList");
 		Student student = studentService.findStudentById(studentId);
 		Collection<Teacher> teachers = teacherService.findTeacherByStudentId(student.getId());
-		
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+        Student studentSession = this.studentService.findStudentByUsername(principal);
+        if(studentSession.getId() != studentId) {
+        	mav = new ModelAndView("redirect:/exception");
+        	return mav;
+        }
 		//"teachers" hace referencia a como se va a llamar en el .jsp
 		mav.addObject("teachers",teachers);
 		return mav;
@@ -121,6 +114,12 @@ public class StudentController {
 	@GetMapping("students/{studentId}/teacherToRate")
 	public ModelAndView teacherToRate(@PathVariable("studentId") int studentId) {
 		ModelAndView mav = new ModelAndView("teachers/teacherToRate");
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+        Student studentSession = this.studentService.findStudentByUsername(principal);
+		if(studentSession.getId() != studentId) {
+        	mav = new ModelAndView("redirect:/exception");
+        	return mav;
+        }
 		Collection<Teacher> teachers = teacherService.teachersToRate(studentId);
 		mav.addObject("teachers",teachers);
 		return mav;

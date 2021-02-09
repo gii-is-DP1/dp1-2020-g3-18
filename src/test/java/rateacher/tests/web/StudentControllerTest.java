@@ -13,10 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.mockito.ArgumentMatchers.any;
 
-
 import java.util.ArrayList;
-
-import javax.security.auth.Subject;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
@@ -160,6 +157,7 @@ public class StudentControllerTest {
 		Teacher teacher = new Teacher("profesor", null, null, null, null, null);
 		when(studentService.findStudentById(student.getId())).thenReturn(student);
 		when(teacherService.findTeacherByStudentId(student.getId())).thenReturn(Lists.list(teacher));
+		when(this.studentService.findStudentByUsername(any())).thenReturn(student);
 		try {
 			//act
 			mockMvc.perform(get("/students/{studentId}/showRatedTeachers", student.getId()))
@@ -183,6 +181,7 @@ public class StudentControllerTest {
 		student.setId(123);
 		Teacher teacher = new Teacher("profesor", null, null, null, null, null);
 		when(teacherService.teachersToRate(student.getId())).thenReturn(Lists.list(teacher));
+		when(this.studentService.findStudentByUsername(any())).thenReturn(student);
 		try {
 			//act
 			mockMvc.perform(get("/students/{studentId}/teacherToRate", student.getId()))
@@ -231,6 +230,7 @@ public class StudentControllerTest {
 		//arrange
 		student.setId(111);
 		when(this.studentService.findStudentByUsername(any())).thenReturn(null);
+		when(this.studentService.findStudentByUsername(any())).thenReturn(student);
 		try {
 			//act
 			mockMvc.perform(get("/subjects/mySubjects/{studentId}", student.getId()))
@@ -272,6 +272,7 @@ public class StudentControllerTest {
 		//arrange
 		student.setId(123);
 		when(teacherService.teachersToRate(student.getId())).thenReturn(Lists.list());
+		when(this.studentService.findStudentByUsername(any())).thenReturn(student);
 		try {
 			//act
 			mockMvc.perform(get("/students/{studentId}/teacherToRate", student.getId()))

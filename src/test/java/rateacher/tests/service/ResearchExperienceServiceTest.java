@@ -66,8 +66,6 @@ public class ResearchExperienceServiceTest {
 		@DisplayName("Saving a researchExperience ")
 		public void shouldSaveResearchExperience() {
 		
-			Collection<ResearchExperience> researchExperiences = this.researchExperienceService.findAll();
-
 			ResearchExperience nuevoResearchExperience = new ResearchExperience("Test to Diseño y Pruebas ");         
 			nuevoResearchExperience.setId(13);
 	                

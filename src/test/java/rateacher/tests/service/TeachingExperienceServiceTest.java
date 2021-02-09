@@ -66,8 +66,6 @@ public class TeachingExperienceServiceTest {
 		@DisplayName("Saving a teachingExperience ")
 		public void shouldSaveTeachingExperience() {
 		
-			Collection<TeachingExperience> teachingExperiences = this.teachingExperienceService.findAll();
-
 			TeachingExperience nuevoTeachingExperience = new TeachingExperience("test to Diseño y Pruebas","test");         
 			nuevoTeachingExperience.setId(13);
 	                

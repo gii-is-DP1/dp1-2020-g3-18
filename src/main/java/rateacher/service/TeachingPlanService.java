@@ -7,7 +7,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import rateacher.model.Subject;
 import rateacher.model.TeachingPlan;
 import rateacher.repository.TeachingPlanRepository;
 
@@ -15,12 +14,10 @@ import rateacher.repository.TeachingPlanRepository;
 public class TeachingPlanService {
 
 	private TeachingPlanRepository teachingPlanRepository;
-	private SubjectService subjectService;
 	
 	@Autowired
-	public TeachingPlanService(TeachingPlanRepository teachingPlanRepository, SubjectService subjectService) {
+	public TeachingPlanService(TeachingPlanRepository teachingPlanRepository) {
 		this.teachingPlanRepository = teachingPlanRepository;
-		this.subjectService=subjectService;
 	}
 
 	@Transactional(readOnly = true)

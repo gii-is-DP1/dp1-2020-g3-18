@@ -8,10 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.PersonalExperience;
-import rateacher.model.Student;
 import rateacher.repository.PersonalExperienceRepository;
-import rateacher.repository.StudentRepository;
-import rateacher.repository.TeacherRepository;
 
 @Service
 public class PersonalExperienceService {

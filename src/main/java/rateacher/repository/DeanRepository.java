@@ -10,8 +10,6 @@ import org.springframework.data.repository.Repository;
 
 import rateacher.model.College;
 import rateacher.model.Dean;
-import rateacher.model.Student;
-import rateacher.model.Teacher;
 
 public interface DeanRepository extends Repository<Dean, Integer>{
 	
@@ -23,7 +21,6 @@ public interface DeanRepository extends Repository<Dean, Integer>{
 	@Query("select s from Dean s where s.user.username = ?1")
 	Dean findDeanByUsername(String username);
 
-	
 	void save(@Valid Dean dean) throws DataAccessException;
 }
 
