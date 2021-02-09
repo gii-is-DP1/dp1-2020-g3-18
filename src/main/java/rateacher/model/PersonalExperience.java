@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +21,7 @@ import lombok.Setter;
 public class PersonalExperience extends BaseEntity{
 
 	//Attributes
-	
+	@NotBlank
 	private String 		name;
 	//Relationships
 	@OneToOne(optional = true)

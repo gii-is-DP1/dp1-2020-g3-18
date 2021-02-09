@@ -39,5 +39,9 @@ public class TeachingPlanService {
 		teachingPlanRepository.save(teachingPlan);
 	}
 
+	@Transactional
+	public void delete(TeachingPlan teachingPlan) {
+		teachingPlanRepository.delete(teachingPlan);
+	}
 	
 }

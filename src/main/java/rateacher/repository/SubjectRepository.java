@@ -32,7 +32,6 @@ public interface SubjectRepository extends Repository<Subject, Integer> {
 
 	
 	@Query("select s from Subject s where s.department.id = ?1")
-
 	List<Subject> findSubjectsFromDepartmentId(int idDepartment);
 
 }

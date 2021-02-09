@@ -12,12 +12,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.assertj.core.util.Lists;
+import org.hamcrest.text.IsBlankString;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -100,19 +100,21 @@ public class DeanControllerTest {
 	@WithMockUser(value = "spring")
 	void CreateTeacherProcessFormTest() {
 		//arrange
-		Teacher teacher1 = new Teacher("nombre", new User(), Lists.list(new College()), new PersonalExperience(),
-				Lists.list(new Department()), Lists.list(new Subject()));
+		Teacher teacher1 = new Teacher();
 		
-		when(this.teacherService.findTeacherById(80)).thenReturn(teacher1);
 
 			try {
 				//act
-				mockMvc.perform(post("/teachers/new", 80, teacher1)
+				mockMvc.perform(post("/teachers/new", teacher1)
 				.with(csrf())
-					.param("username", "pico")
-					.param("password", "pala"))
+					.param("firstName", "nombreDePrueba")
+					.param("lastName", "apellidoDePrueba")
+					.param("name", "nombreDePrueba apellidoDePrueba")
+					.param("user.username", "pico")
+					.param("user.password", "pala"))
 				//assert
-				.andExpect(status().isOk());
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/teachers"));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -244,26 +246,55 @@ public class DeanControllerTest {
 	
 	// Test negativo
 	@Test
-	@Disabled
-	@DisplayName("Test ProcessCreationForm new Teacher with empty name")
+	@DisplayName("Test ProcessCreationForm new Teacher with empty first name")
 	@WithMockUser(value = "spring")
-	void CreateTeacherProcessFormTestEmptyName() {
+	void CreateTeacherProcessFormTestEmptyFirstName() {
 		// arrange
 		Teacher teacher1 = new Teacher();
-		teacher1.setFirstName("");
-		teacher1.setId(800);
-		teacher1.setLastName("Rodríguez");
 
-		when(this.teacherService.findTeacherById(800)).thenReturn(teacher1);
 
 		try {
 			// act
-			mockMvc.perform(post("/teachers/new", 800, teacher1)
-					.param("id", "800")
+			mockMvc.perform(post("/teachers/new", teacher1)
+					.param("firstName", "")
+					.param("lastName", "Rodriguez")
+					.param("name", "Rodriguez")
+					.param("username", "usuario29")
+					.param("password", "usuario29")
+					
 					// assert
 					.with(csrf()))
-					.andExpect(status().isBadRequest());
+					.andExpect(status().isOk())
+					.andExpect(view().name("teachers/newTeacherCreationForm"));
 					
+		} catch (Exception e) {
+			System.err.println("Error testing controller: "+e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	// Test negativo
+	@Test
+	@DisplayName("Test ProcessCreationForm new Teacher with empty last name")
+	@WithMockUser(value = "spring")
+	void CreateTeacherProcessFormTestEmptyLastName() {
+		// arrange
+		Teacher teacher1 = new Teacher();
+
+
+		try {
+			// act
+			mockMvc.perform(post("/teachers/new", teacher1)
+					.param("firstName", "Juan")
+					.param("lastName", "")
+					.param("name", "Rodriguez")
+					.param("username", "usuario29")
+					.param("password", "usuario29")
+					
+					// assert
+					.with(csrf()))
+					.andExpect(status().isOk())
+					.andExpect(view().name("teachers/newTeacherCreationForm"));
 					
 		} catch (Exception e) {
 			System.err.println("Error testing controller: "+e.getMessage());
@@ -271,4 +302,88 @@ public class DeanControllerTest {
 		}
 	}
 
+	// Test negativo
+		@Test
+		@DisplayName("Test ProcessCreationForm new Teacher with empty name")
+		@WithMockUser(value = "spring")
+		void CreateTeacherProcessFormTestEmptyName() {
+			// arrange
+			Teacher teacher1 = new Teacher();
+
+
+			try {
+				// act
+				mockMvc.perform(post("/teachers/new", teacher1)
+						.param("firstName", "Juan")
+						.param("lastName", "Rodriguez")
+						.param("name", "")
+						.param("username", "usuario29")
+						.param("password", "usuario29")
+						
+						// assert
+						.with(csrf()))
+						.andExpect(status().isOk())
+						.andExpect(view().name("teachers/newTeacherCreationForm"));
+						
+			} catch (Exception e) {
+				System.err.println("Error testing controller: "+e.getMessage());
+				e.printStackTrace();
+			}
+		}
+		// Test negativo
+		@Test
+		@DisplayName("Test ProcessCreationForm new Teacher with empty username")
+		@WithMockUser(value = "spring")
+		void CreateTeacherProcessFormTestEmptyUsername() {
+			// arrange
+			Teacher teacher1 = new Teacher();
+
+
+			try {
+				// act
+				mockMvc.perform(post("/teachers/new", teacher1)
+						.param("firstName", "Juan")
+						.param("lastName", "Rodriguez")
+						.param("name", "Rodriguez")
+						.param("username", "")
+						.param("password", "usuario29")
+						
+						// assert
+						.with(csrf()))
+						.andExpect(status().isOk())
+						.andExpect(view().name("teachers/newTeacherCreationForm"));
+						
+			} catch (Exception e) {
+				System.err.println("Error testing controller: "+e.getMessage());
+				e.printStackTrace();
+			}
+		}
+		// Test negativo
+		@Test
+		@DisplayName("Test ProcessCreationForm new Teacher with empty password")
+		@WithMockUser(value = "spring")
+		void CreateTeacherProcessFormTestEmptyPassword() {
+			// arrange
+			Teacher teacher1 = new Teacher();
+
+
+			try {
+				// act
+				mockMvc.perform(post("/teachers/new", teacher1)
+						.param("firstName", "Juan")
+						.param("lastName", "Rodriguez")
+						.param("name", "Rodriguez")
+						.param("username", "")
+						.param("password", "")
+						
+						// assert
+						.with(csrf()))
+						.andExpect(status().isOk())
+						.andExpect(view().name("teachers/newTeacherCreationForm"));
+						
+			} catch (Exception e) {
+				System.err.println("Error testing controller: "+e.getMessage());
+				e.printStackTrace();
+			}
+		}
 }

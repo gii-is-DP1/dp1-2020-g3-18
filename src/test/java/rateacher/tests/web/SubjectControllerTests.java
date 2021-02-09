@@ -132,7 +132,7 @@ public class SubjectControllerTests {
 	@WithMockUser(value = "spring")
 	void CreateSubjectProcessTest() {
 		//arrange
-		when(this.subjectService.findSubjectById(100)).thenReturn(subjectTest);
+		when(this.subjectService.findSubjectById(101)).thenReturn(subjectTest);
 		when(this.teacherService.findTeacherById(100)).thenReturn(teacherTest);
 		when(this.subjectService.findAll()).thenReturn(Lists.list(subjectTest));
 			try {

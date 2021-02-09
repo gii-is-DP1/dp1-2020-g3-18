@@ -25,6 +25,7 @@ import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Subject;
 import rateacher.model.Teacher;
+import rateacher.model.TeachingExperience;
 import rateacher.model.User;
 import rateacher.repository.StudentRepository;
 import rateacher.service.StudentService;
@@ -135,31 +136,9 @@ public class StudentServiceTest2 {
 		assertTrue(!res.isEmpty());
 		assertTrue(res.size() == 1);
 	}
-	
-//	@Test
-//	@Transactional
-//	@DisplayName("Saving a student")
-//	public void shouldSaveStudent() {
-//	
-//		Collection<Student> student = this.studentService.findStudents();
-//		int found = student.size();
-//
-//		Student nuevoStudent = new Student();         
-//		nuevoStudent.setId(13);
-//		nuevoStudent.setName("Amparo");
-//		nuevoStudent.setLastName("García");
-//		nuevoStudent.setUser(new User());
-//                
-//		this.studentService.saveStudent(nuevoStudent);
-//		
-//		
-//		Collection<Student>students = this.studentService.findStudents();
-//		assertTrue(students.size()== found + 1);
-//	}
 
 	// Casos negativos
 	
-	//FindAll ??
 	
 	@Test
 	@DisplayName("find by id doesn't exists ")
