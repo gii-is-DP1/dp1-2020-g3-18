@@ -86,7 +86,7 @@ INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (2, 3, 'Las cla
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (3, 5, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,1);
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (4, 3, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (5, 4, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
-INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (6, 5, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,3);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (6, 5, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
 
 --REPORTES--DATOS
 INSERT INTO reports(id,reason, score_id) VALUES (5,'Comportamiento abusivo', 1);

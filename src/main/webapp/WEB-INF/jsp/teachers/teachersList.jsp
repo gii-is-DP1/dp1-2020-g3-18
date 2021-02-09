@@ -53,12 +53,7 @@
     <sec:authorize access="hasAuthority('student')">
     <a class="btn btn-default"  href="<c:url value="/students/${student.id}/teacherToRate"  />">My teachers to Rate</a>
     </sec:authorize>	
-    <sec:authorize access="hasAuthority('teacher')">
-     <spring:url value="/teachers/{teacherId}/createPersonalExperienceForm" var="mySubjectsUrl">
-                     <spring:param name="teacherId" value="${teacherr.id}"/>
-                     </spring:url>
-                     	<a class="btn btn-default" href="${fn:escapeXml(mySubjectsUrl)}"><c:out value="Create My Personal Experience"/></a>
-      </sec:authorize>
+
       
       <sec:authorize access="hasAuthority('dean')">
      <spring:url value="/teachers/new" var="teacherUrl">
