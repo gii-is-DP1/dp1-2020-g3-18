@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,8 +24,9 @@ import lombok.Setter;
 @Setter
 public class User{
 	@Id
+	@NotBlank
 	String username;
-	
+	@NotBlank
 	String password;
 	
 	boolean enabled;

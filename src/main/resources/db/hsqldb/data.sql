@@ -84,6 +84,8 @@ INSERT INTO students(id,first_name,last_name,username) VALUES (3, 'Serperior', '
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Las clases de este profesor me parecen un autentico toston, creo que no debería deshaogarse tanto con nosotros',1,1);
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (4, 3, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (6, 5, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,3);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (5, 4, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
+INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (7, 5, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
 
 --REPORTES--DATOS
 INSERT INTO reports(id,reason, score_id) VALUES (5,'Comportamiento abusivo', 1);

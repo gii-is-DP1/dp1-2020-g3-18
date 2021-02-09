@@ -55,9 +55,9 @@
         <tr>
             <th>Comment</th>
             <th>Student who made it</th>
-            <c:if test="${teacherAuth}">
+            <sec:authorize access="hasAuthority('teacher')">
             <th>Report comment</th>
-            </c:if>
+           </sec:authorize>
         </tr>
         </thead>
         <tbody>
@@ -69,9 +69,9 @@
                     <spring:url value="/reports/new/{scoreId}" var="reportUrl">
                     <spring:param name="scoreId" value="${scor.id}"/>
                     </spring:url>
-                    <c:if test="${teacherAuth}">
+                    <sec:authorize access="hasAuthority('teacher')">
                     <a href="${fn:escapeXml(reportUrl)}"><c:out value="Report"/></a>
-                	</c:if>
+                	  </sec:authorize>
                 	</td>
 				</tr>
 			</c:forEach>
