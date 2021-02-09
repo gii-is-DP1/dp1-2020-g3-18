@@ -3,6 +3,7 @@ package rateacher.tests.web;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -301,6 +302,131 @@ public class SubjectControllerTests {
 				e.printStackTrace();
 			}
 	}
+	
+	//Netgative
+	
+		@Test
+		@DisplayName("Init add teacher to a subject by bad id ")
+		@WithMockUser(value="spring")
+		void AddTeacherSubjectNegativeTest() {
+			//arrange
+			when(this.teacherService.findTeacherById(101)).thenReturn(null);
+			try {
+				//act
+				mockMvc.perform(get("/subjects/{subjectId}/teachers/{teacherId}/add",100,101))
+				//assert
+				.andExpect(status().isOk())
+				.andExpect(view().name("subjects/AreYouSureView"))
+				.andExpect(model().attribute("teacher", is(not(teacherTest))));
+			}catch (Exception e){
+				System.err.println("Error testing controller: "+e.getMessage());
+				e.printStackTrace();
+			}		
+		}
+		
+		@Test
+		@DisplayName("Test Creating new Subject with bad teacher id")
+		@WithMockUser(value = "spring")
+		void CreateSubjectProcessNegativeTest() {
+			//arrange
+			when(this.subjectService.findSubjectById(101)).thenReturn(subjectTest);
+			when(this.teacherService.findTeacherById(100)).thenReturn(null);
+			when(this.subjectService.findAll()).thenReturn(Lists.list(subjectTest));
+				try {
+					//act
+					mockMvc.perform(post("/subjects/{subjectId}/teachers/{teacherId}/add", 101, 100)
+					.with(csrf()))
+					//assert
+					.andExpect(status().isOk())
+					.andExpect(view().name("exception"));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		
+		@Test
+		@DisplayName("Process creating subject without curso ")
+		@WithMockUser(value = "spring")
+		void processCreationFormNegativeTest() {
+			//arrange
+				try {
+					//act
+					mockMvc.perform(post("/subjects/new", 101)
+					.with(csrf())
+						.param("name", "diseño de redes malvadas")
+						.param("curso", ""))
+					//assert
+					.andExpect(status().isOk())
+					.andExpect(view().name("subjects/newSubject"));
+				} catch (Exception e) {
+					System.err.println("Error testing controller: "+e.getMessage());
+					e.printStackTrace();
+				}
+		}
+		
+		@Test
+		@DisplayName("Test new Teaching plan with bad subject id")
+		@WithMockUser(value="spring")
+		void NewTeachingPlanNegativeTest() {
+			//arrange
+			when(this.subjectService.findSubjectById(100)).thenReturn(null);
+			try {
+				//act
+				mockMvc.perform(get("/subjects/{subjectId}/newTeachingPlan",100))
+				//assert
+				.andExpect(status().isOk())
+				.andExpect(view().name("teachingPlans/newTeachingPlan"))
+				.andExpect(model().attributeDoesNotExist("subjects"));
+			}catch (Exception e){
+				System.err.println("Error testing controller: "+e.getMessage());
+				e.printStackTrace();
+			}		
+		}
+		
+		
+		@Test
+		@DisplayName("Test Creating new TeachingPlan without name")
+		@WithMockUser(value = "spring")
+		void CreateTeachingPlanNegativeTest() {
+			//arrange
+			when(this.subjectService.findSubjectById(101)).thenReturn(subjectTest);
+				try {
+					//act
+					mockMvc.perform(post("/subjects/{subjectId}/newTeachingPlan", 101)
+					.with(csrf())
+						.param("name", ""))
+					//assert
+					.andExpect(status().isOk())
+					.andExpect(view().name("teachingPlans/newTeachingPlan"));
+				} catch (Exception e) {
+					System.err.println("Error testing controller: "+e.getMessage());
+					e.printStackTrace();
+				}
+		}
+		
+		@Test
+		@DisplayName("Test delete subject by bad id")
+		@WithMockUser(value="spring")
+		void DeleteSubjectNegativeTest() {
+			//arrange
+			Subject subject = new Subject("subject a borrar", 3, new Department(), new ArrayList<Teacher>(), new TeachingPlan());
+			subject.setId(101);
+			studentTest.getSubjects().add(subject);
+			teacherTest.getSubjects().add(subject);
+			when(subjectService.findSubjectById(101)).thenReturn(null);
+			try {
+				//act
+				mockMvc.perform(get("/subjects/delete/{subjectId}",101))
+				//assert
+				.andExpect(status().isOk())
+				.andExpect(view().name("subjects/subjectsList"))
+				.andExpect(model().attribute("message", is("Subject not found!")));
+			}catch (Exception e){
+				System.err.println("Error testing controller: "+e.getMessage());
+				e.printStackTrace();
+			}		
+		}
 	
 	
 }
