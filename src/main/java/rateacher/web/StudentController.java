@@ -1,30 +1,17 @@
 package rateacher.web;
 
-
 import java.util.List;
-
 import java.util.Collection;
-
 import java.util.Map;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
-
-import rateacher.model.Score;
 import rateacher.model.Student;
-
 import rateacher.model.Subject;
-import rateacher.model.User;
-
 import rateacher.model.Teacher;
-import rateacher.repository.TeacherRepository;
 import rateacher.service.ScoreService;
-
 import rateacher.service.StudentService;
 import rateacher.service.TeacherService;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

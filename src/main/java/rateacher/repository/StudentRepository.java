@@ -8,11 +8,9 @@ import javax.validation.Valid;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-import org.springframework.data.repository.query.Param;
 
 import rateacher.model.Student;
 import rateacher.model.Subject;
-import rateacher.model.Teacher;
 
 public interface StudentRepository extends Repository<Student, Integer> {
 

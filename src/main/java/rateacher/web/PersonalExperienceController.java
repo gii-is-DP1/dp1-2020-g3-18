@@ -1,12 +1,10 @@
 package rateacher.web;
 
 import java.util.Collection;
-import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -15,27 +13,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import rateacher.model.ExternalEvaluation;
 import rateacher.model.PersonalExperience;
 import rateacher.model.ProfessionalExperience;
 import rateacher.model.ResearchExperience;
-import rateacher.model.Score;
-import rateacher.model.Student;
-import rateacher.model.Subject;
 import rateacher.model.Teacher;
 import rateacher.model.TeachingExperience;
 import rateacher.service.ExternalEvaluationService;
 import rateacher.service.PersonalExperienceService;
 import rateacher.service.ProfessionalExperienceService;
 import rateacher.service.ResearchExperienceService;
-import rateacher.service.ScoreService;
-import rateacher.service.StudentService;
 import rateacher.service.TeacherService;
 import rateacher.service.TeachingExperienceService;
 import rateacher.util.ExternalEvaluationValidator;
-import rateacher.util.ScoreValidator;
 
 @Controller
 public class PersonalExperienceController {

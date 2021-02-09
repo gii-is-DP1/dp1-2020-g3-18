@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.Student;
 import rateacher.model.Subject;
-import rateacher.model.Teacher;
 import rateacher.repository.StudentRepository;
 import rateacher.repository.TeacherRepository;
 

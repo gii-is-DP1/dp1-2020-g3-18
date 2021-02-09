@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.Report;
-import rateacher.model.Student;
-import rateacher.model.Teacher;
 import rateacher.repository.ReportRepository;
 
 @Service

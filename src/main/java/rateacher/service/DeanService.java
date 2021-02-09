@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.College;
 import rateacher.model.Dean;
-import rateacher.model.Student;
 import rateacher.model.Teacher;
 import rateacher.repository.DeanRepository;
 import rateacher.repository.TeacherRepository;

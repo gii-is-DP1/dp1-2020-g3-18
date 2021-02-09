@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +15,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import rateacher.model.Student;
 import rateacher.model.Subject;
-import rateacher.model.Teacher;
 import rateacher.repository.StudentRepository;
 
 @ExtendWith(SpringExtension.class)

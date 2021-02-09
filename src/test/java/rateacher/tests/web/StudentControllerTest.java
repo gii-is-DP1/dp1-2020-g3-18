@@ -13,10 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.mockito.ArgumentMatchers.any;
 
-
 import java.util.ArrayList;
-
-import javax.security.auth.Subject;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;

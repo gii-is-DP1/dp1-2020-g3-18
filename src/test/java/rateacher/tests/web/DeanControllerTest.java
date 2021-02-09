@@ -4,7 +4,6 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -17,12 +16,9 @@ import java.util.Collection;
 import java.util.List;
 
 import org.assertj.core.util.Lists;
-import org.hamcrest.text.IsBlankString;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -36,8 +32,6 @@ import rateacher.configuration.SecurityConfiguration;
 import rateacher.model.College;
 import rateacher.model.Department;
 import rateacher.model.PersonalExperience;
-import rateacher.model.Score;
-import rateacher.model.Student;
 import rateacher.model.Subject;
 import rateacher.model.Teacher;
 import rateacher.model.User;
@@ -45,11 +39,8 @@ import rateacher.repository.CollegeRepository;
 import rateacher.repository.TeacherRepository;
 import rateacher.service.CollegeService;
 import rateacher.service.DeanService;
-import rateacher.service.StudentService;
-import rateacher.service.SubjectService;
 import rateacher.service.TeacherService;
 import rateacher.web.DeanController;
-import rateacher.web.TeacherController;
 
 @WebMvcTest(controllers = DeanController.class,
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),

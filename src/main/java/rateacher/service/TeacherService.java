@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.Department;
 import rateacher.model.Score;
-import rateacher.model.Subject;
 import rateacher.model.Teacher;
 import rateacher.repository.DepartmentRepository;
 import rateacher.repository.TeacherRepository;

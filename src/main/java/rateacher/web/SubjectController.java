@@ -20,10 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import rateacher.model.Dean;
-import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Subject;
-import rateacher.model.Subjects;
 import rateacher.model.Teacher;
 import rateacher.model.TeachingPlan;
 import rateacher.service.DeanService;

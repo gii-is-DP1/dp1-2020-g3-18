@@ -17,15 +17,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
-import javassist.expr.NewArray;
 import rateacher.model.College;
 import rateacher.model.Dean;
-import rateacher.model.Score;
 import rateacher.model.Teacher;
 import rateacher.repository.CollegeRepository;
-import rateacher.repository.DeanRepository;
 import rateacher.repository.TeacherRepository;
 import rateacher.service.CollegeService;
 import rateacher.service.DeanService;

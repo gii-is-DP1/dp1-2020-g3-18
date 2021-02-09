@@ -15,17 +15,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataAccessException;
-import org.springframework.transaction.annotation.Transactional;
 
 import rateacher.model.Score;
 import rateacher.model.Student;
 import rateacher.model.Subject;
 import rateacher.model.Teacher;
-import rateacher.model.TeachingExperience;
 import rateacher.model.User;
 import rateacher.repository.StudentRepository;
 import rateacher.service.StudentService;

@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -18,14 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import rateacher.model.Report;
 import rateacher.model.Score;
-import rateacher.model.Student;
-import rateacher.model.Teacher;
 import rateacher.service.ReportService;
 import rateacher.service.ScoreService;
-import rateacher.service.StudentService;
-import rateacher.service.TeacherService;
 import rateacher.util.ReportValidator;
-import rateacher.util.ScoreValidator;
 
 @Controller
 public class ReportController {
