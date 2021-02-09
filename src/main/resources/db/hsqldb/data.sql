@@ -82,10 +82,7 @@ INSERT INTO students(id,first_name,last_name,username) VALUES (3, 'Serperior', '
 
 --PUNTUACIONES--DATOS
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (1, 1, 'Las clases de este profesor me parecen un autentico toston, creo que no debería deshaogarse tanto con nosotros',1,1);
-INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (2, 3, 'Las clases de este profesor estan mejorando desde el ultimo trimestre, le falta confianza',1,1);
-INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (3, 5, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,1);
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (4, 3, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
-INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (5, 4, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,2);
 INSERT INTO scores(id,valu,comment,student_id,teacher_id) VALUES (6, 5, 'Me gusta mucho como da las clases y como ha evolucionado desde el inicio, un auténtico profesor',1,3);
 
 --REPORTES--DATOS
@@ -117,6 +114,7 @@ INSERT INTO subjects(id,name,curso) VALUES (118,'Derecho de la Informatica', 4);
 INSERT INTO teachers_subjects VALUES (1,111);
 INSERT INTO teachers_subjects VALUES (2,112);
 INSERT INTO teachers_subjects VALUES (1,113);
+INSERT INTO teachers_subjects VALUES (1,116);
 INSERT INTO teachers_subjects VALUES (3,114);
 INSERT INTO teachers_subjects VALUES (2,118);
 INSERT INTO teachers_subjects VALUES (4,115);
