@@ -214,6 +214,13 @@ public class TeacherController {
 	public String initEditForm(@PathVariable int teacherId, @PathVariable int scoreId, ModelMap model) {
 		Score score = this.scoreService.findScoreById(scoreId);
 		model.put("score", score);
+		String principal = SecurityContextHolder.getContext().getAuthentication().getName();
+        Student studentSession = this.studentService.findStudentByUsername(principal);
+		if (score.getStudent().getId()!= studentSession.getId()) {
+			Boolean allow = false;
+			model.put("notAllowed", allow);
+			return "/exception";
+		}
 		Teacher teacher = this.teacherService.findTeacherById(teacherId);
 		model.put("teacher", teacher);
 		return "scores/createForm";
